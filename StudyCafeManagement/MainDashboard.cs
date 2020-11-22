@@ -49,8 +49,8 @@ namespace StudyCafeManagement
 
         private void nButton8_Click(object sender, EventArgs e)
         {
-            PhoneAuth f = new PhoneAuth();
-            f.ShowDialog();
+            PhoneAuth phoneAuth = new PhoneAuth(DB);
+            phoneAuth.ShowDialog();
             if (nTextBox1.Text.Length != 21)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";

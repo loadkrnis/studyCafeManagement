@@ -31,7 +31,7 @@ namespace StudyCafeManagement
         {
             DB.SelectCharge = first;
             DB.SelectTime = "day";
-
+            
             Console.WriteLine(DB.SelectCharge);
             Console.WriteLine(DB.SelectTime);
             Dispose();

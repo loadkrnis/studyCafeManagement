@@ -90,7 +90,7 @@ namespace StudyCafeManagement
                 conn.Open();
                 adapter = new OracleDataAdapter(commandString, conn);
                 DS = new DataSet();
-            }  
+            }
             catch (DataException DE)
             {
                 MessageBox.Show(DE.Message);
@@ -105,7 +105,7 @@ namespace StudyCafeManagement
             query = query.Replace("#ID", id);
             query = query.Replace("#PWD", pwd);
             DataRow[] ResultRows = branchTable.Select(query);
-            
+
             if (ResultRows.Length == 1)
             {
                 branch_id = ResultRows[0]["id"].ToString();
@@ -120,14 +120,14 @@ namespace StudyCafeManagement
 
                 ResultRows = DS.Tables["ChargePlan"].Select("time<>'day'");
                 hourCharge = new string[3];
-                for(int i = 0; i < 3; i++)
+                for (int i = 0; i < 3; i++)
                 {
                     hourCharge[i] = ResultRows[i]["charge"].ToString();
                 }
 
                 return true;
             }
-            else 
+            else
                 return false;
         }
 
@@ -139,6 +139,30 @@ namespace StudyCafeManagement
             sitTable = DS.Tables["Sit"];
             total_sit = sitTable.Select("1=1").Length.ToString();
             using_sit = sitTable.Select("is_used = 'T'").Length.ToString();
+        }
+
+        public bool IsMember(string number)
+        {
+            adapter.SelectCommand = new OracleCommand("select * from member where phone_number = '" + number + "'", conn);
+            DS.Clear();
+            adapter.Fill(DS, "Member");
+            if (DS.Tables["Member"].Select().Length == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool InsertMember(string number)
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from member where branch_id ='" + branch_id + "'", conn);
+            adapter.Fill(DS, "Member");
+            DS.Tables["Member"].Rows.Add("", int.Parse(branch_id), number); //error
+            return true;
         }
     }
 }

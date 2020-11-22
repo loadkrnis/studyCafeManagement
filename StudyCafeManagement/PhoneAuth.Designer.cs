@@ -41,8 +41,8 @@
             this.nButton9 = new Nevron.UI.WinForm.Controls.NButton();
             this.nButton8 = new Nevron.UI.WinForm.Controls.NButton();
             this.nButton7 = new Nevron.UI.WinForm.Controls.NButton();
-            this.nTextBox1 = new Nevron.UI.WinForm.Controls.NTextBox();
             this.nTextBox2 = new Nevron.UI.WinForm.Controls.NTextBox();
+            this.nTextBox1 = new Nevron.UI.WinForm.Controls.NTextBox();
             this.SuspendLayout();
             // 
             // nButton19
@@ -55,6 +55,7 @@
             this.nButton19.TabIndex = 22;
             this.nButton19.Text = "초기화";
             this.nButton19.UseVisualStyleBackColor = false;
+            this.nButton19.Click += new System.EventHandler(this.nButton19_Click);
             // 
             // nButton16
             // 
@@ -66,6 +67,7 @@
             this.nButton16.TabIndex = 23;
             this.nButton16.Text = "9";
             this.nButton16.UseVisualStyleBackColor = false;
+            this.nButton16.Click += new System.EventHandler(this.nButton16_Click);
             // 
             // nButton18
             // 
@@ -77,6 +79,7 @@
             this.nButton18.TabIndex = 24;
             this.nButton18.Text = "0";
             this.nButton18.UseVisualStyleBackColor = false;
+            this.nButton18.Click += new System.EventHandler(this.nButton18_Click);
             // 
             // nButton15
             // 
@@ -88,6 +91,7 @@
             this.nButton15.TabIndex = 25;
             this.nButton15.Text = "8";
             this.nButton15.UseVisualStyleBackColor = false;
+            this.nButton15.Click += new System.EventHandler(this.nButton15_Click);
             // 
             // nButton13
             // 
@@ -99,6 +103,7 @@
             this.nButton13.TabIndex = 26;
             this.nButton13.Text = "6";
             this.nButton13.UseVisualStyleBackColor = false;
+            this.nButton13.Click += new System.EventHandler(this.nButton13_Click);
             // 
             // nButton12
             // 
@@ -110,6 +115,7 @@
             this.nButton12.TabIndex = 27;
             this.nButton12.Text = "5";
             this.nButton12.UseVisualStyleBackColor = false;
+            this.nButton12.Click += new System.EventHandler(this.nButton12_Click);
             // 
             // nButton17
             // 
@@ -121,6 +127,7 @@
             this.nButton17.TabIndex = 28;
             this.nButton17.Text = "<";
             this.nButton17.UseVisualStyleBackColor = false;
+            this.nButton17.Click += new System.EventHandler(this.nButton17_Click);
             // 
             // nButton14
             // 
@@ -132,6 +139,7 @@
             this.nButton14.TabIndex = 29;
             this.nButton14.Text = "7";
             this.nButton14.UseVisualStyleBackColor = false;
+            this.nButton14.Click += new System.EventHandler(this.nButton14_Click);
             // 
             // nButton10
             // 
@@ -143,6 +151,7 @@
             this.nButton10.TabIndex = 30;
             this.nButton10.Text = "3";
             this.nButton10.UseVisualStyleBackColor = false;
+            this.nButton10.Click += new System.EventHandler(this.nButton10_Click);
             // 
             // nButton11
             // 
@@ -154,6 +163,7 @@
             this.nButton11.TabIndex = 31;
             this.nButton11.Text = "4";
             this.nButton11.UseVisualStyleBackColor = false;
+            this.nButton11.Click += new System.EventHandler(this.nButton11_Click);
             // 
             // nButton9
             // 
@@ -165,6 +175,7 @@
             this.nButton9.TabIndex = 32;
             this.nButton9.Text = "2";
             this.nButton9.UseVisualStyleBackColor = false;
+            this.nButton9.Click += new System.EventHandler(this.nButton9_Click);
             // 
             // nButton8
             // 
@@ -176,6 +187,7 @@
             this.nButton8.TabIndex = 33;
             this.nButton8.Text = "1";
             this.nButton8.UseVisualStyleBackColor = false;
+            this.nButton8.Click += new System.EventHandler(this.nButton8_Click);
             // 
             // nButton7
             // 
@@ -185,9 +197,23 @@
             this.nButton7.Palette.Scheme = Nevron.UI.WinForm.Controls.ColorScheme.Longhorn;
             this.nButton7.Size = new System.Drawing.Size(249, 52);
             this.nButton7.TabIndex = 21;
-            this.nButton7.Text = "인증번호 입력";
+            this.nButton7.Text = "인증번호 발송";
             this.nButton7.UseVisualStyleBackColor = false;
             this.nButton7.Click += new System.EventHandler(this.nButton7_Click);
+            // 
+            // nTextBox2
+            // 
+            this.nTextBox2.Border.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
+            this.nTextBox2.Border.InteractiveBorder = true;
+            this.nTextBox2.Border.Style = Nevron.UI.BorderStyle3D.Sunken;
+            this.nTextBox2.Enabled = false;
+            this.nTextBox2.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.nTextBox2.Location = new System.Drawing.Point(46, 261);
+            this.nTextBox2.Name = "nTextBox2";
+            this.nTextBox2.Size = new System.Drawing.Size(249, 44);
+            this.nTextBox2.TabIndex = 20;
+            this.nTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.nTextBox2.Visible = false;
             // 
             // nTextBox1
             // 
@@ -198,22 +224,9 @@
             this.nTextBox1.Location = new System.Drawing.Point(46, 261);
             this.nTextBox1.Name = "nTextBox1";
             this.nTextBox1.Size = new System.Drawing.Size(249, 44);
-            this.nTextBox1.TabIndex = 20;
-            this.nTextBox1.Text = "17583";
+            this.nTextBox1.TabIndex = 34;
+            this.nTextBox1.Text = "010-";
             this.nTextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // nTextBox2
-            // 
-            this.nTextBox2.Border.BaseColor = System.Drawing.Color.FromArgb(((int)(((byte)(88)))), ((int)(((byte)(88)))), ((int)(((byte)(88)))));
-            this.nTextBox2.Border.InteractiveBorder = true;
-            this.nTextBox2.Border.Style = Nevron.UI.BorderStyle3D.Sunken;
-            this.nTextBox2.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.nTextBox2.Location = new System.Drawing.Point(46, 196);
-            this.nTextBox2.Name = "nTextBox2";
-            this.nTextBox2.Size = new System.Drawing.Size(249, 44);
-            this.nTextBox2.TabIndex = 34;
-            this.nTextBox2.Text = "010-4909-9623";
-            this.nTextBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PhoneAuth
             // 
@@ -221,7 +234,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(610, 600);
-            this.Controls.Add(this.nTextBox2);
+            this.Controls.Add(this.nTextBox1);
             this.Controls.Add(this.nButton19);
             this.Controls.Add(this.nButton16);
             this.Controls.Add(this.nButton18);
@@ -235,11 +248,12 @@
             this.Controls.Add(this.nButton9);
             this.Controls.Add(this.nButton8);
             this.Controls.Add(this.nButton7);
-            this.Controls.Add(this.nTextBox1);
+            this.Controls.Add(this.nTextBox2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "PhoneAuth";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "PhoneAuth";
+            this.Load += new System.EventHandler(this.PhoneAuth_Load);
             this.ResumeLayout(false);
 
         }
@@ -259,7 +273,7 @@
         private Nevron.UI.WinForm.Controls.NButton nButton9;
         private Nevron.UI.WinForm.Controls.NButton nButton8;
         private Nevron.UI.WinForm.Controls.NButton nButton7;
-        private Nevron.UI.WinForm.Controls.NTextBox nTextBox1;
         private Nevron.UI.WinForm.Controls.NTextBox nTextBox2;
+        private Nevron.UI.WinForm.Controls.NTextBox nTextBox1;
     }
 }
