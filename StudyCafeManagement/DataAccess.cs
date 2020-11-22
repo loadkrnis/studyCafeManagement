@@ -11,16 +11,53 @@ namespace StudyCafeManagement
 {
     public class DataAccess
     {
-        private int selectSitNumber; 
-        OracleDataAdapter DBAdapter;
+
+        OracleDataAdapter adapter;
         DataSet DS;
         OracleCommandBuilder myCommandBuilder;
         DataTable branchTable;
         DataTable sitTable;
+        private OracleConnection conn;
+
+        private string selectSitNumber;
+        private string selectTime;
+        private string selectCharge;
+
+        public string SelectSitNumber
+        {
+            get { return selectSitNumber; }
+            set { selectSitNumber = value; }
+        }
+
+        public string SelectTime
+        {
+            get { return selectTime; }
+            set { selectTime = value; }
+        }
+
+        public string SelectCharge
+        {
+            get { return selectCharge; }
+            set { selectCharge = value; }
+        }
+
         private string branch_id;
         private string branch_name;
         private string total_sit;
         private string using_sit;
+        public string bug;
+        private string dayCharge;
+        private string[] hourCharge;
+
+        public string DayCharge
+        {
+            get { return dayCharge; }
+        }
+
+        public string[] HourCharge
+        {
+            get { return hourCharge; }
+        }
 
         public string TotalSit
         {
@@ -43,48 +80,26 @@ namespace StudyCafeManagement
         }
 
 
-        public string bug;
-        private string branchNumber;
         public DataAccess(string id, string pwd)
         {
             try
             {
                 string connectionString = "User Id=" + id + "; Password=" + pwd + "; Data Source=(DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = localhost)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = xe) ) );";
                 string commandString = "select * from branch";
-                DBAdapter = new OracleDataAdapter(commandString, connectionString);
-
-                myCommandBuilder = new OracleCommandBuilder(DBAdapter);
+                conn = new OracleConnection(connectionString);
+                conn.Open();
+                adapter = new OracleDataAdapter(commandString, conn);
                 DS = new DataSet();
-                
             }  
             catch (DataException DE)
             {
                 MessageBox.Show(DE.Message);
             }
-
-            /*
-            string query = "select ename from emp";
-            OracleDataAdapter adapter = new OracleDataAdapter(query, conn);
-            adapter.SelectCommand = new OracleCommand(query, conn);
-            DataSet ds = new DataSet();
-            adapter.Fill(ds);
-
-            OracleCommandBuilder builder = new OracleCommandBuilder(adapter);
-            adapter.Fill(ds);
-
-
-            OracleCommand comm = new OracleCommand(query, conn);
-            OracleDataReader rs = comm.ExecuteReader();
-            while (rs.Read())
-            {
-                Console.Write(" " + rs.GetString(0) + " ");
-            }
-            */
         }
+
         public bool CheckIdPwd(string id, string pwd)
         {
-            DS.Clear();
-            DBAdapter.Fill(DS, "Branch");
+            adapter.Fill(DS, "Branch");
             branchTable = DS.Tables["Branch"];
             string query = "ceo_id = '#ID' AND ceo_password = '#PWD'";
             query = query.Replace("#ID", id);
@@ -96,13 +111,34 @@ namespace StudyCafeManagement
                 branch_id = ResultRows[0]["id"].ToString();
                 branch_name = ResultRows[0]["name"].ToString();
                 DS.Clear();
+                UpdateSit();
 
-                DBAdapter.Fill(DS, "Sit");
-                //sitTable = DS.Tables("Sit");
+                adapter.SelectCommand = new OracleCommand("select * from charge_plan where branch_id='" + branch_id + "' order  by time", conn);
+                adapter.Fill(DS, "ChargePlan");
+                ResultRows = DS.Tables["ChargePlan"].Select("time = 'day'");
+                dayCharge = ResultRows[0]["charge"].ToString();
+
+                ResultRows = DS.Tables["ChargePlan"].Select("time<>'day'");
+                hourCharge = new string[3];
+                for(int i = 0; i < 3; i++)
+                {
+                    hourCharge[i] = ResultRows[i]["charge"].ToString();
+                }
+
                 return true;
             }
             else 
                 return false;
+        }
+
+        public void UpdateSit()
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "'", conn);
+            adapter.Fill(DS, "Sit");
+            sitTable = DS.Tables["Sit"];
+            total_sit = sitTable.Select("1=1").Length.ToString();
+            using_sit = sitTable.Select("is_used = 'T'").Length.ToString();
         }
     }
 }

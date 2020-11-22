@@ -187,6 +187,7 @@
             this.nButton7.TabIndex = 21;
             this.nButton7.Text = "인증번호 입력";
             this.nButton7.UseVisualStyleBackColor = false;
+            this.nButton7.Click += new System.EventHandler(this.nButton7_Click);
             // 
             // nTextBox1
             // 

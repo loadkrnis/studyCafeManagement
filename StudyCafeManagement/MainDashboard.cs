@@ -17,7 +17,10 @@ namespace StudyCafeManagement
         {
             InitializeComponent();
             DB = db;
-            label4.Text = db.BranchName;
+            label4.Text = DB.BranchName;
+            label8.Text = DB.TotalSit;
+            label9.Text = DB.UsingSit;
+            label10.Text = (int.Parse(DB.TotalSit) - int.Parse(DB.UsingSit)).ToString();
         }
 
         private void MainDashboard_Load(object sender, EventArgs e)
@@ -152,7 +155,7 @@ namespace StudyCafeManagement
 
         private void nButton1_Click(object sender, EventArgs e)
         {
-            DayPay dayPay = new DayPay();
+            DayPay dayPay = new DayPay(DB);
             dayPay.ShowDialog();
         }
 

@@ -16,5 +16,10 @@ namespace StudyCafeManagement
         {
             InitializeComponent();
         }
+
+        private void nButton7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

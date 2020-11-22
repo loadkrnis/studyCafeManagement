@@ -43,5 +43,29 @@ namespace StudyCafeManagement
             MessageBox.Show("아이디 또는 비밀번호 오류입니다.");
             }
         }
+
+        private void AdminLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, null);
+            }
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, null);
+            }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                button1_Click(sender, null);
+            }
+        }
     }
 }

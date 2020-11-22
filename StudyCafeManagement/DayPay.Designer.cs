@@ -41,6 +41,7 @@
             this.nButton1.TabIndex = 0;
             this.nButton1.Text = "--------------\r\n1일 (24시간) \r\n#COAST원\r\n--------------";
             this.nButton1.UseVisualStyleBackColor = false;
+            this.nButton1.Click += new System.EventHandler(this.nButton1_Click);
             // 
             // DayPay
             // 
