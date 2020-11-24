@@ -87,7 +87,7 @@ namespace StudyCafeManagement
 
         private void nButton8_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "1";
@@ -96,7 +96,7 @@ namespace StudyCafeManagement
 
         private void nButton9_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "2";
@@ -105,7 +105,7 @@ namespace StudyCafeManagement
 
         private void nButton10_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "3";
@@ -114,7 +114,7 @@ namespace StudyCafeManagement
 
         private void nButton11_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "4";
@@ -123,7 +123,7 @@ namespace StudyCafeManagement
 
         private void nButton12_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "5";
@@ -132,7 +132,7 @@ namespace StudyCafeManagement
 
         private void nButton13_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "6";
@@ -141,7 +141,7 @@ namespace StudyCafeManagement
 
         private void nButton14_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "7";
@@ -150,7 +150,7 @@ namespace StudyCafeManagement
 
         private void nButton15_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "8";
@@ -159,7 +159,7 @@ namespace StudyCafeManagement
 
         private void nButton16_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "9";
@@ -168,7 +168,7 @@ namespace StudyCafeManagement
 
         private void nButton18_Click(object sender, EventArgs e)
         {
-            if (target.Text.Length != 21)
+            if (target.Text.Length != 13)
             {
                 if (target.Text.Length == 8) target.Text += "-";
                 target.Text += "0";

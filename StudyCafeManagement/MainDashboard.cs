@@ -51,7 +51,7 @@ namespace StudyCafeManagement
         {
             PhoneAuth phoneAuth = new PhoneAuth(DB);
             phoneAuth.ShowDialog();
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "1";
@@ -60,7 +60,7 @@ namespace StudyCafeManagement
 
         private void nButton9_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "2";
@@ -69,7 +69,7 @@ namespace StudyCafeManagement
 
         private void nButton10_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "3";
@@ -78,7 +78,7 @@ namespace StudyCafeManagement
 
         private void nButton11_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "4";
@@ -87,7 +87,7 @@ namespace StudyCafeManagement
 
         private void nButton12_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "5";
@@ -96,7 +96,7 @@ namespace StudyCafeManagement
 
         private void nButton13_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "6";
@@ -105,7 +105,7 @@ namespace StudyCafeManagement
 
         private void nButton14_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "7";
@@ -114,7 +114,7 @@ namespace StudyCafeManagement
 
         private void nButton15_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "8";
@@ -123,7 +123,7 @@ namespace StudyCafeManagement
 
         private void nButton16_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "9";
@@ -141,7 +141,7 @@ namespace StudyCafeManagement
 
         private void nButton18_Click(object sender, EventArgs e)
         {
-            if (nTextBox1.Text.Length != 21)
+            if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
                 nTextBox1.Text += "0";
