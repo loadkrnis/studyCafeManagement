@@ -60,6 +60,8 @@ namespace StudyCafeManagement
 
         private void nButton9_Click(object sender, EventArgs e)
         {
+            SelectSit s = new SelectSit();
+            s.ShowDialog();
             if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
