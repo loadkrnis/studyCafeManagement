@@ -67,8 +67,13 @@ namespace StudyCafeManagement
                 {
                     MessageBox.Show("인증이 완료되었습니다.");
                     if (DB.InsertMember(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "")))
-                        MessageBox.Show("insert 완료");
-                    else MessageBox.Show("insert 실패");
+                    {
+                        //좌석선택
+                    }
+                    else 
+                    {
+                        MessageBox.Show("알 수 없는 오류가 발생하였습니다. 관리자에게 문의하세요. (InsertMember Method Error)");
+                    }
                     // DB insert 
                     // 자리선택
                     Dispose();

@@ -1,4 +1,5 @@
 ﻿using Oracle.DataAccess.Client;
+using Oracle.DataAccess.Types;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,7 +15,7 @@ namespace StudyCafeManagement
 
         OracleDataAdapter adapter;
         DataSet DS;
-        OracleCommandBuilder myCommandBuilder;
+        OracleCommandBuilder builder;
         DataTable branchTable;
         DataTable sitTable;
         private OracleConnection conn;
@@ -45,6 +46,7 @@ namespace StudyCafeManagement
         private string branch_name;
         private string total_sit;
         private string using_sit;
+        private string member_id;
         public string bug;
         private string dayCharge;
         private string[] hourCharge;
@@ -89,6 +91,7 @@ namespace StudyCafeManagement
                 conn = new OracleConnection(connectionString);
                 conn.Open();
                 adapter = new OracleDataAdapter(commandString, conn);
+                builder = new OracleCommandBuilder(adapter);
                 DS = new DataSet();
             }
             catch (DataException DE)
@@ -158,11 +161,29 @@ namespace StudyCafeManagement
 
         public bool InsertMember(string number)
         {
-            DS.Clear();
-            adapter.SelectCommand = new OracleCommand("select * from member where branch_id ='" + branch_id + "'", conn);
-            adapter.Fill(DS, "Member");
-            DS.Tables["Member"].Rows.Add("", int.Parse(branch_id), number); //error
-            return true;
+            try
+            {
+                DS.Clear();
+                adapter.SelectCommand = new OracleCommand("select * from member where branch_id ='" + branch_id + "'", conn);
+                adapter.Fill(DS, "Member");
+                DataRow newRow = DS.Tables["Member"].NewRow();
+                newRow["branch_id"] = branch_id;
+                newRow["phone_number"] = number;
+                newRow["create_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+                DS.Tables["Member"].Rows.Add(newRow);
+                DS.AcceptChanges();
+                adapter.SelectCommand = new OracleCommand("select member_id from member where phone_number = '" + number + "'", conn);
+                DS.Clear();
+                adapter.Fill(DS, "Member");
+                member_id = DS.Tables["Member"].Rows[0]["member_id"].ToString();
+                return true;
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return false;
+            
         }
     }
 }
