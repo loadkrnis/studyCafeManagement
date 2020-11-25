@@ -14,6 +14,7 @@ namespace StudyCafeManagement
     public partial class SelectSit : Form
     {
         Graphics g;
+        DataAccess DB;
         int[,] arr = new int[,]
 {
         { 121, 122 },
@@ -21,9 +22,10 @@ namespace StudyCafeManagement
         { 321, 322 }
 };
 
-        public SelectSit()
+        public SelectSit(DataAccess db)
         {
             InitializeComponent();
+            DB = db;
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -51,21 +53,30 @@ namespace StudyCafeManagement
         private void DrawSit(int x, int y, string sitNumber, char isUsed)
         {
             Console.WriteLine("X : " + x + "  Y : " + y);
-            Pen p = new Pen(Color.Black, 5);
-            Font f = new Font("나눔고딕", 21, FontStyle.Bold);
-            g.DrawRectangle(p, x, y, 40, 35);
-            if(sitNumber.Length == 1)
+            Pen p = new Pen(Color.Gray, 3);
+            Font f = new Font("휴먼둥근헤드라인", 16, FontStyle.Bold);
+            if (isUsed == 'T')
             {
-                g.DrawString(sitNumber, f, Brushes.Black, x+4, y);
+                g.FillRectangle(Brushes.DimGray, x, y, 40, 35);
+            }
+            if (isUsed == 'F')
+            {
+                g.FillRectangle(Brushes.GreenYellow, x, y, 40, 35);
+            }
+            g.DrawRectangle(p, x, y, 40, 35);
+            if (sitNumber.Length == 1)
+            {
+                g.DrawString(sitNumber, f, Brushes.Black, x + 8, y + 7);
             }
             else
             {
-                g.DrawString(sitNumber, f, Brushes.Black, x, y);
+                g.DrawString(sitNumber, f, Brushes.Black, x, y + 7);
             }
         }
 
         private void SelectSit_Load(object sender, EventArgs e)
         {
+            DB.GetSits();
         }
     }
 }

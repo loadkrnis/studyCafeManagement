@@ -60,7 +60,7 @@ namespace StudyCafeManagement
 
         private void nButton9_Click(object sender, EventArgs e)
         {
-            SelectSit s = new SelectSit();
+            SelectSit s = new SelectSit(DB);
             s.ShowDialog();
             if (nTextBox1.Text.Length != 13)
             {

@@ -16,7 +16,7 @@ namespace StudyCafeManagement
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SelectSit());
+            Application.Run(new AdminLogin());
         }
     }
 }

@@ -103,6 +103,7 @@
     <Compile Include="SelectSit.Designer.cs">
       <DependentUpon>SelectSit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Sit.cs" />
     <EmbeddedResource Include="AdminLogin.resx">
       <DependentUpon>AdminLogin.cs</DependentUpon>
     </EmbeddedResource>

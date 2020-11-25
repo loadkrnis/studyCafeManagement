@@ -178,12 +178,35 @@ namespace StudyCafeManagement
                 member_id = DS.Tables["Member"].Rows[0]["member_id"].ToString();
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine(e.Message);
             }
             return false;
-            
         }
+
+        public Sit[] GetSits()
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' order by sit_num asc", conn);
+            adapter.Fill(DS, "Sit");
+            int x;
+            int y;
+            char isUsed;
+            Sit[] result = new Sit[DS.Tables["Sit"].Rows.Count];
+            for(int i = 0; i < result.Length; i++)
+            {
+                x = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_x"]);
+                y = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_y"]);
+                isUsed = Convert.ToChar(DS.Tables["Sit"].Rows[i]["is_used"]);
+                result[i] = new Sit(x, y, isUsed);
+            }
+            for(int i = 0; i < result.Length; i++)
+            {
+                Console.WriteLine(result[i].x + " " + result[i].y + " " + result[i].isUsed);
+            }
+            return result;
+        }
+
     }
 }
