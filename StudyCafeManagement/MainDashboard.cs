@@ -12,7 +12,12 @@ namespace StudyCafeManagement
 {
     public partial class MainDashboard : Form
     {
-        public DataAccess DB;
+        private DataAccess db;
+        public DataAccess DB
+        {
+            get { return db; }
+            set { db = value; }
+        }
         public MainDashboard(DataAccess db)
         {
             InitializeComponent();
@@ -158,6 +163,7 @@ namespace StudyCafeManagement
         private void nButton1_Click(object sender, EventArgs e)
         {
             DayPay dayPay = new DayPay(DB);
+            dayPay.Owner = this;
             dayPay.ShowDialog();
         }
 

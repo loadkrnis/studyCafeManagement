@@ -35,6 +35,7 @@ namespace StudyCafeManagement
             Console.WriteLine(DB.SelectCharge);
             Console.WriteLine(DB.SelectTime);
             SelectSit s = new SelectSit(DB);
+            s.Owner = this.Owner;
             s.ShowDialog();
             Dispose();
         }

@@ -30,6 +30,7 @@
         {
             this.label4 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -40,7 +41,7 @@
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.label4.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label4.ForeColor = System.Drawing.SystemColors.Control;
-            this.label4.Location = new System.Drawing.Point(233, 37);
+            this.label4.Location = new System.Drawing.Point(252, 9);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(169, 43);
             this.label4.TabIndex = 4;
@@ -50,36 +51,50 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::StudyCafeManagement.Properties.Resources.sitImage;
-            this.pictureBox1.Location = new System.Drawing.Point(-1, 105);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 64);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(678, 848);
+            this.pictureBox1.Size = new System.Drawing.Size(678, 804);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
             this.pictureBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseClick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.YellowGreen;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label1.Location = new System.Drawing.Point(453, 26);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(31, 26);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "      \r\n      ";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("휴먼둥근헤드라인", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label2.Location = new System.Drawing.Point(479, 37);
+            this.label2.BackColor = System.Drawing.Color.LightSlateGray;
+            this.label2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label2.Location = new System.Drawing.Point(453, 69);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(20, 17);
+            this.label2.Size = new System.Drawing.Size(31, 26);
             this.label2.TabIndex = 7;
-            this.label2.Text = "1";
+            this.label2.Text = "      \r\n      ";
             // 
             // SelectSit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 788);
+            this.BackColor = System.Drawing.SystemColors.Window;
+            this.ClientSize = new System.Drawing.Size(677, 869);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.label4);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SelectSit";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "SelectSit";
             this.Load += new System.EventHandler(this.SelectSit_Load);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.SelectSit_MouseClick);
@@ -93,6 +108,7 @@
 
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
     }
 }

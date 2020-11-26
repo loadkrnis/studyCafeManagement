@@ -15,6 +15,7 @@ namespace StudyCafeManagement
     {
         Graphics g;
         DataAccess DB;
+        Sit[] SitArr;
 
         public SelectSit(DataAccess db)
         {
@@ -33,19 +34,27 @@ namespace StudyCafeManagement
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-
-            Bitmap canvas;
-            canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            pictureBox1.Image = canvas;
-            pictureBox1.Size = canvas.Size;
-            g = Graphics.FromImage(pictureBox1.Image);
-            g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
             DrawSit(new Sit(e.X, e.Y, 7, 'T'));
+            
+            for(int i = 0; i < SitArr.Length; i++)
+             {
+                 if((e.X >= SitArr[i].x && e.X <= SitArr[i].x+40) && (e.Y >= SitArr[i].y && e.Y <= SitArr[i].y + 35))
+                 {
+                    MessageBox.Show(SitArr[i].num + "번 좌석을 선택하였습니다.");
+                    DB.SelectSitNumber = SitArr[i].num.ToString();
+                    PhoneAuth p = new PhoneAuth(DB);
+                    p.Owner = this.Owner;
+                    p.ShowDialog();
+                    Dispose();
+                    break;
+                 }
+             }
+             
+
         }
 
         private void DrawSit(Sit sit)
         {
-            Console.WriteLine("X : " + sit.x + "  Y : " + sit.y);
             Pen p = new Pen(Color.Gray, 3);
             Font f = new Font("휴먼둥근헤드라인", 16, FontStyle.Bold);
             if (sit.isUsed == 'T')
@@ -69,7 +78,15 @@ namespace StudyCafeManagement
 
         private void SelectSit_Load(object sender, EventArgs e)
         {
-            Sit[] SitArr = DB.GetSits();
+            this.Location = new Point(this.Owner.Location.X, this.Owner.Location.Y + 80);
+            Bitmap canvas;
+            canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = canvas;
+            pictureBox1.Size = canvas.Size;
+            g = Graphics.FromImage(pictureBox1.Image);
+            g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
+            //DrawSit(new Sit())
+            SitArr = DB.GetSits();
             for(int i = 0; i < SitArr.Length; i++)
             {
                 DrawSit(SitArr[i]);

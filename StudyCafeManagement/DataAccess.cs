@@ -22,6 +22,7 @@ namespace StudyCafeManagement
         
         public string bug;
         private string member_id;
+        private string phone_number;
         private string selectSitNumber;
         private string selectTime;
         private string selectCharge;
@@ -87,6 +88,12 @@ namespace StudyCafeManagement
             {
                 MessageBox.Show(DE.Message);
             }
+        }
+
+        public string PhoneNumber
+        {
+            get { return phone_number; }
+            set { phone_number = value; }
         }
 
         public bool CheckIdPwd(string id, string pwd)

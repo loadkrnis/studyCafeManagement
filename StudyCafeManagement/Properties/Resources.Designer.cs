@@ -73,9 +73,9 @@ namespace StudyCafeManagement.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Coffee_Cup {
+        internal static System.Drawing.Bitmap Coffe_Cup {
             get {
-                object obj = ResourceManager.GetObject("Coffee-Cup", resourceCulture);
+                object obj = ResourceManager.GetObject("Coffe-Cup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace StudyCafeManagement.Properties {
         /// <summary>
         ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
-        internal static System.Drawing.Bitmap Coffee_Cup2 {
+        internal static System.Drawing.Bitmap Coffee_Cup {
             get {
-                object obj = ResourceManager.GetObject("Coffee-Cup2", resourceCulture);
+                object obj = ResourceManager.GetObject("Coffee-Cup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

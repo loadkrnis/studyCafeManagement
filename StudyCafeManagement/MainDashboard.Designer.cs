@@ -456,7 +456,7 @@
             // 
             this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBox2.Image = global::StudyCafeManagement.Properties.Resources.Coffee_Cup2;
+            this.pictureBox2.Image = global::StudyCafeManagement.Properties.Resources.Coffee_Cup;
             this.pictureBox2.Location = new System.Drawing.Point(345, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(244, 106);

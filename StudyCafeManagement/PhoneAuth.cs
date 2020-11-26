@@ -34,13 +34,14 @@ namespace StudyCafeManagement
                     if (DB.IsMember(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "")))
                     {
                         MessageBox.Show("회원입니다.");
-                        //자리선택
+                        //sale 테이블 insert
+                        //영수증 출력 
                         Dispose();
                     }
                     else
                     {
                         MessageBox.Show("회원이 아닙니다.\n인증번호를 발송하였습니다.");
-                        nTextBox1.Location = new System.Drawing.Point(46, 196);
+                        nTextBox1.Location = new System.Drawing.Point(nTextBox1.Location.X, nTextBox1.Location.Y - 66);
                         nTextBox1.Enabled = false;
                         nTextBox2.Visible = true;
                         nTextBox2.Enabled = true;
@@ -68,14 +69,14 @@ namespace StudyCafeManagement
                     MessageBox.Show("인증이 완료되었습니다.");
                     if (DB.InsertMember(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "")))
                     {
-                        //좌석선택
+                        //sale 테이블 insert
+                        //영수증 출력
                     }
-                    else 
+                    else
                     {
                         MessageBox.Show("알 수 없는 오류가 발생하였습니다. 관리자에게 문의하세요. (InsertMember Method Error)");
                     }
-                    // DB insert 
-                    // 자리선택
+
                     Dispose();
                 }
                 else
@@ -208,6 +209,7 @@ namespace StudyCafeManagement
         private void PhoneAuth_Load(object sender, EventArgs e)
         {
             target.Focus();
+            this.Location = new Point(this.Owner.Location.X, this.Owner.Location.Y + 80);
         }
     }
 }
