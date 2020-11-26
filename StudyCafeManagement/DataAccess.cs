@@ -19,68 +19,57 @@ namespace StudyCafeManagement
         DataTable branchTable;
         DataTable sitTable;
         private OracleConnection conn;
-
+        
+        public string bug;
+        private string member_id;
         private string selectSitNumber;
         private string selectTime;
         private string selectCharge;
-
+        private string branch_id;
+        private string branch_name;
+        private string total_sit;
+        private string using_sit;
+        private string dayCharge;
+        private string[] hourCharge;
+        public string DayCharge
+        {
+            get { return dayCharge; }
+        }
+        public string[] HourCharge
+        {
+            get { return hourCharge; }
+        }
+        public string TotalSit
+        {
+            get { return total_sit; }
+        }
+        public string UsingSit
+        {
+            get { return using_sit; }
+        }
+        public string BranchName
+        {
+            get { return branch_name; }
+        }
+        public string BranchId
+        {
+            get { return branch_id; }
+        }
         public string SelectSitNumber
         {
             get { return selectSitNumber; }
             set { selectSitNumber = value; }
         }
-
         public string SelectTime
         {
             get { return selectTime; }
             set { selectTime = value; }
         }
-
         public string SelectCharge
         {
             get { return selectCharge; }
             set { selectCharge = value; }
         }
-
-        private string branch_id;
-        private string branch_name;
-        private string total_sit;
-        private string using_sit;
-        private string member_id;
-        public string bug;
-        private string dayCharge;
-        private string[] hourCharge;
-
-        public string DayCharge
-        {
-            get { return dayCharge; }
-        }
-
-        public string[] HourCharge
-        {
-            get { return hourCharge; }
-        }
-
-        public string TotalSit
-        {
-            get { return total_sit; }
-        }
-
-        public string UsingSit
-        {
-            get { return using_sit; }
-        }
-
-        public string BranchName
-        {
-            get { return branch_name; }
-        }
-
-        public string BranchId
-        {
-            get { return branch_id; }
-        }
-
 
         public DataAccess(string id, string pwd)
         {
@@ -171,8 +160,9 @@ namespace StudyCafeManagement
                 newRow["phone_number"] = number;
                 newRow["create_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                 DS.Tables["Member"].Rows.Add(newRow);
+                adapter.Update(DS, "Member");
                 DS.AcceptChanges();
-                adapter.SelectCommand = new OracleCommand("select member_id from member where phone_number = '" + number + "'", conn);
+                adapter.SelectCommand = new OracleCommand("select * from member where phone_number='" + number + "'", conn);
                 DS.Clear();
                 adapter.Fill(DS, "Member");
                 member_id = DS.Tables["Member"].Rows[0]["member_id"].ToString();
@@ -180,7 +170,7 @@ namespace StudyCafeManagement
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                Console.WriteLine(e.Message + "이거다");
             }
             return false;
         }
@@ -199,7 +189,7 @@ namespace StudyCafeManagement
                 x = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_x"]);
                 y = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_y"]);
                 isUsed = Convert.ToChar(DS.Tables["Sit"].Rows[i]["is_used"]);
-                result[i] = new Sit(x, y, isUsed);
+                result[i] = new Sit(x, y, i+1,isUsed);
             }
             for(int i = 0; i < result.Length; i++)
             {

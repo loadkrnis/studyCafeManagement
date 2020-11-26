@@ -15,12 +15,6 @@ namespace StudyCafeManagement
     {
         Graphics g;
         DataAccess DB;
-        int[,] arr = new int[,]
-{
-        { 121, 122 },
-        { 221, 222 },
-        { 321, 322 }
-};
 
         public SelectSit(DataAccess db)
         {
@@ -41,42 +35,45 @@ namespace StudyCafeManagement
         {
 
             Bitmap canvas;
-
             canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             pictureBox1.Image = canvas;
             pictureBox1.Size = canvas.Size;
             g = Graphics.FromImage(pictureBox1.Image);
             g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
-            DrawSit(e.X, e.Y, "7", 'T');
+            DrawSit(new Sit(e.X, e.Y, 7, 'T'));
         }
 
-        private void DrawSit(int x, int y, string sitNumber, char isUsed)
+        private void DrawSit(Sit sit)
         {
-            Console.WriteLine("X : " + x + "  Y : " + y);
+            Console.WriteLine("X : " + sit.x + "  Y : " + sit.y);
             Pen p = new Pen(Color.Gray, 3);
             Font f = new Font("휴먼둥근헤드라인", 16, FontStyle.Bold);
-            if (isUsed == 'T')
+            if (sit.isUsed == 'T')
             {
-                g.FillRectangle(Brushes.DimGray, x, y, 40, 35);
+                g.FillRectangle(Brushes.DimGray, sit.x, sit.y, 40, 35);
             }
-            if (isUsed == 'F')
+            if (sit.isUsed == 'F')
             {
-                g.FillRectangle(Brushes.GreenYellow, x, y, 40, 35);
+                g.FillRectangle(Brushes.GreenYellow, sit.x, sit.y, 40, 35);
             }
-            g.DrawRectangle(p, x, y, 40, 35);
-            if (sitNumber.Length == 1)
+            g.DrawRectangle(p, sit.x, sit.y, 40, 35);
+            if (sit.num < 10)
             {
-                g.DrawString(sitNumber, f, Brushes.Black, x + 8, y + 7);
+                g.DrawString(sit.num.ToString(), f, Brushes.Black, sit.x + 8, sit.y + 7);
             }
             else
             {
-                g.DrawString(sitNumber, f, Brushes.Black, x, y + 7);
+                g.DrawString(sit.num.ToString(), f, Brushes.Black, sit.x, sit.y + 7);
             }
         }
 
         private void SelectSit_Load(object sender, EventArgs e)
         {
-            DB.GetSits();
+            Sit[] SitArr = DB.GetSits();
+            for(int i = 0; i < SitArr.Length; i++)
+            {
+                DrawSit(SitArr[i]);
+            }
         }
     }
 }

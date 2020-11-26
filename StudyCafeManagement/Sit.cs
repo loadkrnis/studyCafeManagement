@@ -10,11 +10,13 @@ namespace StudyCafeManagement
     {
         public int x;
         public int y;
+        public int num;
         public char isUsed;
-        public Sit(int x, int y, char isUsed)
+        public Sit(int x, int y, int num, char isUsed)
         {
             this.x = x;
             this.y = y;
+            this.num = num;
             this.isUsed = isUsed;
         }
     }
