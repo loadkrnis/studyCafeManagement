@@ -19,3 +19,4 @@ C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.Day
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.HourPay.resources
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.PhoneAuth.resources
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.SelectSit.resources
+C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.Print.resources

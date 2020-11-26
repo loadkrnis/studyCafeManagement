@@ -18,7 +18,7 @@ namespace StudyCafeManagement
         DataAccess DB;
 
         public PhoneAuth(DataAccess db)
-        {
+        { 
             InitializeComponent();
             flag = 0;
             target = nTextBox1;
