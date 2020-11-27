@@ -34,10 +34,11 @@ namespace StudyCafeManagement
                     if (DB.IsMember(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "")))
                     {
                         MessageBox.Show("회원입니다.");
+                        MainDashboard MD = (MainDashboard)Owner;
                         DB.InsertSale();
-                        MainDashboard ds = (MainDashboard) Owner;
-                        ds.DB = DB;
-                        ds.SetSitValue();
+                        MD.DB = DB;
+                        MD.SetSitValue();
+
                         //sale 테이블 insert
                         //영수증 출력 
                         Dispose();
@@ -73,6 +74,10 @@ namespace StudyCafeManagement
                     MessageBox.Show("인증이 완료되었습니다.");
                     if (DB.InsertMember(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "")))
                     {
+                        MainDashboard MD = (MainDashboard)Owner;
+                        DB.InsertSale();
+                        MD.DB = DB;
+                        MD.SetSitValue();
                         //sale 테이블 insert
                         //영수증 출력
                     }
