@@ -37,6 +37,7 @@ namespace StudyCafeManagement
                         DB.InsertSale();
                         MainDashboard ds = (MainDashboard) Owner;
                         ds.DB = DB;
+                        ds.SetSitValue();
                         //sale 테이블 insert
                         //영수증 출력 
                         Dispose();

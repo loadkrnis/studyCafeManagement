@@ -22,6 +22,10 @@ namespace StudyCafeManagement
         {
             InitializeComponent();
             DB = db;
+            SetSitValue();
+        }
+        public void SetSitValue()
+        {
             label4.Text = DB.BranchName;
             label8.Text = DB.TotalSit;
             label9.Text = DB.UsingSit;
