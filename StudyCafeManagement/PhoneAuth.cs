@@ -34,6 +34,9 @@ namespace StudyCafeManagement
                     if (DB.IsMember(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "")))
                     {
                         MessageBox.Show("회원입니다.");
+                        DB.InsertSale();
+                        MainDashboard ds = (MainDashboard) Owner;
+                        ds.DB = DB;
                         //sale 테이블 insert
                         //영수증 출력 
                         Dispose();

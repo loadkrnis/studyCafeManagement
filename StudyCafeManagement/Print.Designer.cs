@@ -33,7 +33,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(355, 107);
+            this.button1.Location = new System.Drawing.Point(103, 60);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 0;
@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(309, 93);
             this.Controls.Add(this.button1);
             this.Name = "Print";
             this.Text = "Print";
@@ -54,6 +54,7 @@
         }
 
         #endregion
+
         private System.Windows.Forms.Button button1;
     }
 }

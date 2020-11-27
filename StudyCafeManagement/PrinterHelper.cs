@@ -17,7 +17,7 @@ namespace StudyCafeManagement
     class PrinterHelper
     {
         // Structure and API declarions:
-        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public class DOCINFOA
         {
             [MarshalAs(UnmanagedType.LPStr)]
@@ -30,13 +30,13 @@ namespace StudyCafeManagement
 
         #region DllImport to Control the Printer
 
-        [DllImport("winspool.Drv", EntryPoint = "OpenPrinterA", SetLastError = true, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        [DllImport("winspool.Drv", EntryPoint = "OpenPrinterA", SetLastError = true, CharSet = CharSet.Auto, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern bool OpenPrinter([MarshalAs(UnmanagedType.LPStr)] string szPrinter, out IntPtr hPrinter, IntPtr pd);
 
         [DllImport("winspool.Drv", EntryPoint = "ClosePrinter", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern bool ClosePrinter(IntPtr hPrinter);
 
-        [DllImport("winspool.Drv", EntryPoint = "StartDocPrinterA", SetLastError = true, CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
+        [DllImport("winspool.Drv", EntryPoint = "StartDocPrinterA", SetLastError = true, CharSet = CharSet.Auto, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
         public static extern bool StartDocPrinter(IntPtr hPrinter, Int32 level, [In, MarshalAs(UnmanagedType.LPStruct)] DOCINFOA di);
 
         [DllImport("winspool.Drv", EntryPoint = "EndDocPrinter", SetLastError = true, ExactSpelling = true, CallingConvention = CallingConvention.StdCall)]
@@ -234,6 +234,7 @@ namespace StudyCafeManagement
             // Send the converted ANSI string to the printer.
             SendBytesToPrinter(szPrinterName, pBytes, dwCount);
             Marshal.FreeCoTaskMem(pBytes);
+            
             return true;
         }
 
@@ -276,10 +277,10 @@ namespace StudyCafeManagement
         /// Print Barcode
         /// </summary>
         /// <returns></returns>
-        public static bool PrintBarcode()
+        public static bool PrintBarcode(string code)
         {
             // Barcode Data
-            string testStr = "{A{STESTBARCODE";
+            string testStr = code;
             byte[] tempByte = Encoding.Default.GetBytes(testStr);
 
             Byte[] bytes = new Byte[tempByte.Length + 7];

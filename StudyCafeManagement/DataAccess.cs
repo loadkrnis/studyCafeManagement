@@ -147,6 +147,7 @@ namespace StudyCafeManagement
             adapter.Fill(DS, "Member");
             if (DS.Tables["Member"].Select().Length == 1)
             {
+                member_id = DS.Tables["Member"].Rows[0]["member_id"].ToString();
                 return true;
             }
             else
@@ -205,5 +206,36 @@ namespace StudyCafeManagement
             return result;
         }
 
+        public bool InsertSale()
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from sale where branch_id ='" + branch_id + "'", conn);
+            adapter.Fill(DS, "Sale");
+            DataRow newRow = DS.Tables["Sale"].NewRow();
+            newRow["member_id"] = member_id;
+            newRow["branch_id"] = branch_id;
+            newRow["charge"] = SelectCharge;
+            newRow["begin_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            if(SelectTime == "day")
+            {
+                newRow["end_at"] = DateTime.Now.AddDays(1).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            else //시간 정액제 선택
+            {
+                newRow["end_at"] = DateTime.Now.AddHours(Convert.ToInt32(SelectTime)).ToString("yyyy-MM-dd HH:mm:ss");
+            }
+            DS.Tables["Sale"].Rows.Add(newRow);
+            adapter.Update(DS, "Sale");
+            DS.AcceptChanges();
+
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' and sit_num='" + selectSitNumber + "'", conn);
+            adapter.Fill(DS, "Sit");
+            DS.Tables["Sit"].Rows[0]["is_used"] = 'T';
+            adapter.Update(DS, "Sit");
+            DS.AcceptChanges();
+            UpdateSit();
+            return true;
+        }
     }
 }

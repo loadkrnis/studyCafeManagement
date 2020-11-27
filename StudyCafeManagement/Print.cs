@@ -58,12 +58,15 @@ namespace StudyCafeManagement
                 printStr += "(*)표시는   과세  품목입니다.\n";
                 printStr += "본 영수증은 교환 및 환불시 필요합니다.\n";
                 printStr += "잘 보관하시기 바랍니다. 감사합니다.\n\n";
-                printStr += "17시04분13초              담당자: 김하늘\n";
+                printStr += "17시04분13초              담당자: 김하늘\n\n\n";
 
                 // Blank String to Print out properly
                 printStr += "                                                                                                                  \n";
                 printStr += "                                                                                                                  \n";
                 PrinterHelper.SendStringToPrinter(Program.printerName, printStr);
+                PrinterHelper.PrintBarcode("01042614444");
+                PrinterHelper.PrintBarcode("01049099623");
+                PrinterHelper.PartialCut();
             }
             catch (Exception ex)
             {
