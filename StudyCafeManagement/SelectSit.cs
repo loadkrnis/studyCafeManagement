@@ -16,6 +16,7 @@ namespace StudyCafeManagement
         Graphics g;
         DataAccess DB;
         Sit[] SitArr;
+        Sit[] FalseSitArr;
 
         public SelectSit(DataAccess db)
         {
@@ -36,12 +37,12 @@ namespace StudyCafeManagement
         {
             DrawSit(new Sit(e.X, e.Y, 7, 'T'));
             
-            for(int i = 0; i < SitArr.Length; i++)
+            for(int i = 0; i < FalseSitArr.Length; i++)
              {
-                 if((e.X >= SitArr[i].x && e.X <= SitArr[i].x+40) && (e.Y >= SitArr[i].y && e.Y <= SitArr[i].y + 35))
+                 if((e.X >= FalseSitArr[i].x && e.X <= FalseSitArr[i].x+40) && (e.Y >= FalseSitArr[i].y && e.Y <= FalseSitArr[i].y + 35))
                  {
-                    MessageBox.Show(SitArr[i].num + "번 좌석을 선택하였습니다.");
-                    DB.SelectSitNumber = SitArr[i].num.ToString();
+                    MessageBox.Show(FalseSitArr[i].num + "번 좌석을 선택하였습니다.");
+                    DB.SelectSitNumber = FalseSitArr[i].num.ToString();
                     PhoneAuth p = new PhoneAuth(DB);
                     p.Owner = this.Owner;
                     p.ShowDialog();
@@ -87,6 +88,7 @@ namespace StudyCafeManagement
             g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
             //DrawSit(new Sit())
             SitArr = DB.GetSits();
+            FalseSitArr = DB.GetFalseSits();
             for(int i = 0; i < SitArr.Length; i++)
             {
                 DrawSit(SitArr[i]);

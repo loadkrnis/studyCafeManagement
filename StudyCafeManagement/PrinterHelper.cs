@@ -49,7 +49,6 @@ namespace StudyCafeManagement
             szString += "승인:55994411      청구금액:      "+charge+"원\n";
             szString += "승인 시간: 170411063003\n\n";
             szString += "총 품목수 : 1              총 구매수량 : 1\n\n";
-            szString += "(*)표시는   과세  품목입니다.\n";
             szString += "본 영수증은 스터디카페 입장시 필요합니다.\n";
             szString += "잘 보관하시기 바랍니다. 감사합니다.";
             szString += "                                                                                                                  \n";
