@@ -31,7 +31,6 @@ namespace StudyCafeManagement
                 // You can change as your own language
 
                 string printStr = "SAM4S(C)" + "\n\n";
-                printStr += "777-77-77777  BONG\n";
                 printStr += "서울시 금천구 가산동 371-28\n";
                 printStr += "Tel : 02-777-8888\n";
                 printStr += "2011년 06월 16일 일요일  No.555555-7777\n\n";
@@ -63,10 +62,10 @@ namespace StudyCafeManagement
                 // Blank String to Print out properly
                 printStr += "                                                                                                                  \n";
                 printStr += "                                                                                                                  \n";
-                PrinterHelper.SendStringToPrinter(Program.printerName, printStr);
-                PrinterHelper.PrintBarcode("01042614444");
-                PrinterHelper.PrintBarcode("01049099623");
-                PrinterHelper.PartialCut();
+                PrinterHelper.SendStringToPrinter(Program.printerName, printStr, "01042614444");
+                //PrinterHelper.PrintBarcode("01042614444");
+                //PrinterHelper.PrintBarcode("01049099623");
+                //PrinterHelper.PartialCut();
             }
             catch (Exception ex)
             {

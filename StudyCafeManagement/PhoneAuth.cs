@@ -38,6 +38,7 @@ namespace StudyCafeManagement
                         DB.InsertSale();
                         MD.DB = DB;
                         MD.SetSitValue();
+                        PrinterHelper.Print(DB);
 
                         //sale 테이블 insert
                         //영수증 출력 
@@ -78,6 +79,7 @@ namespace StudyCafeManagement
                         DB.InsertSale();
                         MD.DB = DB;
                         MD.SetSitValue();
+                        PrinterHelper.Print(DB);
                         //sale 테이블 insert
                         //영수증 출력
                     }

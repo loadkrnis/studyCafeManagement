@@ -32,6 +32,12 @@ namespace StudyCafeManagement
         private string using_sit;
         private string dayCharge;
         private string[] hourCharge;
+        private string branch_address;
+        public string BrachAddress
+        {
+            get { return branch_address; }
+            set { branch_address = value; }
+        }
         public string DayCharge
         {
             get { return dayCharge; }
@@ -109,6 +115,7 @@ namespace StudyCafeManagement
             {
                 branch_id = ResultRows[0]["id"].ToString();
                 branch_name = ResultRows[0]["name"].ToString();
+                branch_address = ResultRows[0]["address"].ToString();
                 DS.Clear();
                 UpdateSit();
 
@@ -227,7 +234,6 @@ namespace StudyCafeManagement
             DS.Tables["Sale"].Rows.Add(newRow);
             adapter.Update(DS, "Sale");
             DS.AcceptChanges();
-
             DS.Clear();
             adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' and sit_num='" + selectSitNumber + "'", conn);
             adapter.Fill(DS, "Sit");
@@ -235,6 +241,7 @@ namespace StudyCafeManagement
             adapter.Update(DS, "Sit");
             DS.AcceptChanges();
             UpdateSit();
+
             return true;
         }
     }

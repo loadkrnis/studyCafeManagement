@@ -11,11 +11,105 @@ using System.IO;
 using System.Runtime.InteropServices;
 
 using System.Drawing.Imaging;
+using System.Globalization;
 
 namespace StudyCafeManagement
 {
     class PrinterHelper
     {
+        public static void Print(DataAccess DB)
+        {
+            CultureInfo cultures = CultureInfo.CreateSpecificCulture("ko-KR");
+            string date = DateTime.Now.ToString(string.Format("yyyy년 MM월 dd일 ddd요일", cultures));
+            string time;
+            if (DB.SelectTime == "day") time = "24시간";
+            else time = DB.SelectTime + "시간";
+            string charge = String.Format("{0:#,0}", Convert.ToInt32(DB.SelectCharge));
+            string supply = String.Format("{0:#,0}", (Convert.ToInt32(DB.SelectCharge)*0.1));
+            string vat = String.Format("{0:#,0}", (Convert.ToInt32(DB.SelectCharge) * 0.9));
+
+            string szString = "SAM4S(C)" + "\n\n";
+            szString += "777-77-77777  BONG\n";
+            szString +=  DB.BrachAddress + "\n";
+            szString += "Tel : 010-4261-4444\n";
+            szString +=  date + "  No."+ DB.BranchId + DateTime.Now.ToString(string.Format("yyyyMMdd", cultures))+"\n\n";
+            szString += "신문화를 창조하는 Book & Cup \n";
+            szString += "항상 최고로 모시겠습니다.\n\n";
+            szString += "------------------------------------------\n";
+            szString += "상  품                             금 액\n";
+            szString += "------------------------------------------\n";
+            szString += "독서실 이용("+time+")               "+charge+"원\n";
+            szString += "면세 공급가                            0원\n";
+            szString += "과세 공급가                        "+supply+"원\n";
+            szString += "부가 가치세                       "+vat+"원\n\n";
+            szString += "------------------------------------------\n";
+            szString += "SAM4S 보너스 카드\n\n";
+            szString += "3개월                             "+charge+"원\n";
+            szString += "카드:3333-55**-*666-111            ****/**\n";
+            szString += "승인:55994411      청구금액:      "+charge+"원\n";
+            szString += "승인 시간: 170411063003\n\n";
+            szString += "총 품목수 : 1              총 구매수량 : 1\n\n";
+            szString += "(*)표시는   과세  품목입니다.\n";
+            szString += "본 영수증은 스터디카페 입장시 필요합니다.\n";
+            szString += "잘 보관하시기 바랍니다. 감사합니다.";
+            szString += "                                                                                                                  \n";
+            szString += "                                                                                                                  \n";
+            string szPrinterName = Program.printerName;
+            string code = "01045671234";
+            IntPtr pBytes;
+            Int32 dwCount;
+            // How many characters are in the string?
+            dwCount = szString.Length;
+            // Assume that the printer is expecting ANSI text, and then convert
+            // the string to ANSI text.
+            pBytes = Marshal.StringToCoTaskMemAnsi(szString);
+            // Send the converted ANSI string to the printer.
+            SendBytesToPrinter(szPrinterName, pBytes, dwCount);
+            Marshal.FreeCoTaskMem(pBytes);
+
+
+
+
+
+            string testStr = code;
+            byte[] tempByte = Encoding.Default.GetBytes(testStr);
+
+            Byte[] bytes = new Byte[tempByte.Length + 7];
+            bool bSuccess = false;
+
+            // Your unmanaged pointer.
+            IntPtr pUnmanagedBytes = new IntPtr(0);
+            int nLength;
+
+            nLength = bytes.Length;
+
+            // Set Barcode Height
+            bytes[0] = 29;
+            bytes[1] = 104;
+            bytes[2] = 90;
+
+            // Print Barcode
+            bytes[3] = 29;
+            bytes[4] = 107;
+            // Barcode Type : Code128
+            bytes[5] = 73;
+            bytes[6] = (byte)tempByte.Length;
+
+            for (int i = 0; i < tempByte.Length; i++)
+            {
+                bytes[7 + i] = tempByte[i];
+            }
+
+            // Allocate some unmanaged memory for those bytes.
+            pUnmanagedBytes = Marshal.AllocCoTaskMem(nLength);
+            // Copy the managed byte array into the unmanaged array.
+            Marshal.Copy(bytes, 0, pUnmanagedBytes, nLength);
+            // Send the unmanaged bytes to the printer.
+            bSuccess = SendBytesToPrinter(Program.printerName, pUnmanagedBytes, nLength);
+            // Free the unmanaged memory that you allocated earlier.
+            Marshal.FreeCoTaskMem(pUnmanagedBytes);
+            
+        }
         // Structure and API declarions:
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         public class DOCINFOA
@@ -222,7 +316,7 @@ namespace StudyCafeManagement
         /// <param name="szPrinterName"></param>
         /// <param name="szString"></param>
         /// <returns></returns>
-        public static bool SendStringToPrinter(string szPrinterName, string szString)
+        public static bool SendStringToPrinter(string szPrinterName, string szString, string code)
         {
             IntPtr pBytes;
             Int32 dwCount;
@@ -234,7 +328,49 @@ namespace StudyCafeManagement
             // Send the converted ANSI string to the printer.
             SendBytesToPrinter(szPrinterName, pBytes, dwCount);
             Marshal.FreeCoTaskMem(pBytes);
-            
+
+
+
+
+
+            string testStr = code;
+            byte[] tempByte = Encoding.Default.GetBytes(testStr);
+
+            Byte[] bytes = new Byte[tempByte.Length + 7];
+            bool bSuccess = false;
+
+            // Your unmanaged pointer.
+            IntPtr pUnmanagedBytes = new IntPtr(0);
+            int nLength;
+
+            nLength = bytes.Length;
+
+            // Set Barcode Height
+            bytes[0] = 29;
+            bytes[1] = 104;
+            bytes[2] = 90;
+
+            // Print Barcode
+            bytes[3] = 29;
+            bytes[4] = 107;
+            // Barcode Type : Code128
+            bytes[5] = 73;
+            bytes[6] = (byte)tempByte.Length;
+
+            for (int i = 0; i < tempByte.Length; i++)
+            {
+                bytes[7 + i] = tempByte[i];
+            }
+
+            // Allocate some unmanaged memory for those bytes.
+            pUnmanagedBytes = Marshal.AllocCoTaskMem(nLength);
+            // Copy the managed byte array into the unmanaged array.
+            Marshal.Copy(bytes, 0, pUnmanagedBytes, nLength);
+            // Send the unmanaged bytes to the printer.
+            bSuccess = SendBytesToPrinter(Program.printerName, pUnmanagedBytes, nLength);
+            // Free the unmanaged memory that you allocated earlier.
+            Marshal.FreeCoTaskMem(pUnmanagedBytes);
+
             return true;
         }
 
