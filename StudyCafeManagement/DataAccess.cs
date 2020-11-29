@@ -32,7 +32,13 @@ namespace StudyCafeManagement
         private string using_sit;
         private string dayCharge;
         private string[] hourCharge;
+        private string[] hourTime;
         private string branch_address;
+        public string[] HourTime
+        {
+            get { return hourTime; }
+            set { hourTime = value; }
+        }
         public string BrachAddress
         {
             get { return branch_address; }
@@ -126,9 +132,11 @@ namespace StudyCafeManagement
 
                 ResultRows = DS.Tables["ChargePlan"].Select("time<>'day'");
                 hourCharge = new string[3];
+                hourTime = new string[3];
                 for (int i = 0; i < 3; i++)
                 {
                     hourCharge[i] = ResultRows[i]["charge"].ToString();
+                    hourTime[i] = ResultRows[i]["time"].ToString();
                 }
 
                 return true;

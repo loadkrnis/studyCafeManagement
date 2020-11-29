@@ -43,6 +43,7 @@
             this.nButton1.TabIndex = 1;
             this.nButton1.Text = "--------------\r\n#H시간 \r\n#COAST원\r\n--------------";
             this.nButton1.UseVisualStyleBackColor = false;
+            this.nButton1.Click += new System.EventHandler(this.nButton1_Click);
             // 
             // nButton2
             // 
@@ -54,6 +55,7 @@
             this.nButton2.TabIndex = 2;
             this.nButton2.Text = "--------------\r\n#H시간 \r\n#COAST원\r\n--------------";
             this.nButton2.UseVisualStyleBackColor = false;
+            this.nButton2.Click += new System.EventHandler(this.nButton2_Click);
             // 
             // nButton3
             // 
@@ -65,6 +67,7 @@
             this.nButton3.TabIndex = 3;
             this.nButton3.Text = "--------------\r\n#H시간 \r\n#COAST원\r\n--------------";
             this.nButton3.UseVisualStyleBackColor = false;
+            this.nButton3.Click += new System.EventHandler(this.nButton3_Click);
             // 
             // HourPay
             // 

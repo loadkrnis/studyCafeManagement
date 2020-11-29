@@ -58,8 +58,6 @@ namespace StudyCafeManagement
 
         private void nButton8_Click(object sender, EventArgs e)
         {
-            PhoneAuth phoneAuth = new PhoneAuth(DB);
-            phoneAuth.ShowDialog();
             if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
@@ -69,8 +67,6 @@ namespace StudyCafeManagement
 
         private void nButton9_Click(object sender, EventArgs e)
         {
-            SelectSit s = new SelectSit(DB);
-            s.ShowDialog();
             if (nTextBox1.Text.Length != 13)
             {
                 if (nTextBox1.Text.Length == 8) nTextBox1.Text += "-";
@@ -173,7 +169,8 @@ namespace StudyCafeManagement
 
         private void nButton2_Click(object sender, EventArgs e)
         {
-            HourPay hourPay = new HourPay();
+            HourPay hourPay = new HourPay(DB);
+            hourPay.Owner = this;
             hourPay.ShowDialog();
         }
     }
