@@ -249,6 +249,7 @@
             this.nButton4.TabIndex = 14;
             this.nButton4.Text = "자리이동";
             this.nButton4.UseVisualStyleBackColor = false;
+            this.nButton4.Click += new System.EventHandler(this.nButton4_Click);
             // 
             // nButton5
             // 
@@ -468,7 +469,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 954);
+            this.ClientSize = new System.Drawing.Size(677, 788);
             this.Controls.Add(this.nButton19);
             this.Controls.Add(this.nButton16);
             this.Controls.Add(this.nButton18);

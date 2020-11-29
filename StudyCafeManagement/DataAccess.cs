@@ -282,8 +282,11 @@ namespace StudyCafeManagement
             adapter.Fill(DS, "Sit");
             DS.Tables["Sit"].Rows[0]["is_used"] = 'T';
             DS.Tables["Sit"].Rows[0]["end_at"] = newRow["end_at"];
+            DS.Tables["Sit"].Rows[0]["member_id"] = member_id;
             adapter.Update(DS, "Sit");
             DS.AcceptChanges();
+
+
 
             UpdateSit();
 

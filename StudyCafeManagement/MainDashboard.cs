@@ -52,7 +52,7 @@ namespace StudyCafeManagement
             string d = dt.ToString("dd");
             string t = dt.ToString("HH:mm");
             label1.Text = y;
-            label2.Text = m+ "/" + d;
+            label2.Text = m + "/" + d;
             label3.Text = t;
         }
 
@@ -140,8 +140,9 @@ namespace StudyCafeManagement
         private void nButton17_Click(object sender, EventArgs e)
         {
             if (nTextBox1.Text.Length == 4) { }
-            else { 
-                if(nTextBox1.Text.Length == 10) { nTextBox1.Text = nTextBox1.Text.Remove(nTextBox1.TextLength - 1); }
+            else
+            {
+                if (nTextBox1.Text.Length == 10) { nTextBox1.Text = nTextBox1.Text.Remove(nTextBox1.TextLength - 1); }
                 nTextBox1.Text = nTextBox1.Text.Remove(nTextBox1.TextLength - 1);
             }
         }
@@ -172,6 +173,15 @@ namespace StudyCafeManagement
             HourPay hourPay = new HourPay(DB);
             hourPay.Owner = this;
             hourPay.ShowDialog();
+        }
+
+        private void nButton4_Click(object sender, EventArgs e)
+        {
+            if (nTextBox1.Text.Length != 13) { MessageBox.Show("하단에 휴대폰번호를 입력해주세요."); }
+            else
+            {
+
+            }
         }
     }
 }
