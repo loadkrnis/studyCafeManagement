@@ -86,7 +86,6 @@ namespace StudyCafeManagement
             pictureBox1.Size = canvas.Size;
             g = Graphics.FromImage(pictureBox1.Image);
             g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
-            //DrawSit(new Sit())
             SitArr = DB.GetSits();
             FalseSitArr = DB.GetFalseSits();
             for(int i = 0; i < SitArr.Length; i++)
