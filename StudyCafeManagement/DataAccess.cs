@@ -35,6 +35,12 @@ namespace StudyCafeManagement
         private string[] hourCharge;
         private string[] hourTime;
         private string branch_address;
+        private bool isChange = false;
+        public bool IsChange
+        {
+            get { return isChange; }
+            set { isChange = value; }
+        }
         public string[] HourTime
         {
             get { return hourTime; }

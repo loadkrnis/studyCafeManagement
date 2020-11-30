@@ -43,9 +43,15 @@ namespace StudyCafeManagement
                  {
                     MessageBox.Show(FalseSitArr[i].num + "번 좌석을 선택하였습니다.");
                     DB.SelectSitNumber = FalseSitArr[i].num.ToString();
+                    if(DB.IsChange == true)
+                    {
+
+                    }
+                    else if(DB.IsChange == false) { 
                     PhoneAuth p = new PhoneAuth(DB);
                     p.Owner = this.Owner;
                     p.ShowDialog();
+                    }
                     Dispose();
                     break;
                  }

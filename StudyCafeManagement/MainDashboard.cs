@@ -180,7 +180,20 @@ namespace StudyCafeManagement
             if (nTextBox1.Text.Length != 13) { MessageBox.Show("하단에 휴대폰번호를 입력해주세요."); }
             else
             {
-
+                if(DB.IsMember(nTextBox1.Text.Replace("-","").Replace("-","").Replace("","")))
+                {
+                    //if(DB.HasSit("01044444444")) { 
+                    DB.IsChange = true;
+                    SelectSit s = new SelectSit(DB);
+                    s.Owner = this;
+                    s.ShowDialog();
+                    //}
+                    //else { MessageBox.Show("사용중인 고객이 아닙니다."); }
+                }
+                else
+                {
+                    MessageBox.Show("사용중인 고객이 아닙니다.");
+                }
             }
         }
     }
