@@ -321,6 +321,7 @@ namespace StudyCafeManagement
                 if(DS.Tables["Sit"].Rows.Count == 1)
                 {
                     BeforeSit = DS.Tables["Sit"].Rows[0]["sit_num"].ToString();
+                    SelectSitNumber = BeforeSit;
                     return true;
                 }
                 else
@@ -347,6 +348,29 @@ namespace StudyCafeManagement
             DS.AcceptChanges();
             UpdateSit();
         }
-
+        public bool Checkout()
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from sit where member_id='" + member_id + "'", conn);
+            adapter.Fill(DS, "Sit");
+            DS.Tables["Sit"].Rows[0]["end_at"] = DateTime.Now;
+            DS.Tables["Sit"].Rows[0]["is_used"] = 'F';
+            adapter.Update(DS, "Sit");
+            DS.AcceptChanges();
+            UpdateSit();
+            return true;
+        }
+        public bool Reprinting()
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from sit where member_id='" + member_id + "'", conn);
+            adapter.Fill(DS, "Sit");
+            if(DS.Tables["Sit"].Rows.Count == 0) { return false; }
+            adapter.SelectCommand = new OracleCommand("select * from member where member_id='" + member_id + "'", conn);
+            adapter.Fill(DS, "Member");
+            PhoneNumber = DS.Tables["Member"].Rows[0]["phone_number"].ToString();
+            Console.WriteLine("PhoneNumber : "+PhoneNumber);
+            return true;
+        }
     }
 }

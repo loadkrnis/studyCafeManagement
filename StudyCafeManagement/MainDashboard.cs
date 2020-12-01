@@ -199,5 +199,48 @@ namespace StudyCafeManagement
                 }
             }
         }
+
+        private void nButton6_Click(object sender, EventArgs e)
+        {
+            string number = nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "");
+            if (nTextBox1.Text.Length != 13) { MessageBox.Show("하단에 휴대폰번호를 입력해주세요."); }
+            else
+            {
+                if (DB.IsMember(number))
+                {
+                    if (DB.Checkout())
+                    {
+                        MessageBox.Show("퇴실이 완료 되었습니다.");
+                    }
+                    else { MessageBox.Show("사용중인 고객이 아닙니다."); }
+                }
+                else
+                {
+                    MessageBox.Show("사용중인 고객이 아닙니다.");
+                }
+            }
+        }
+
+        private void nButton7_Click(object sender, EventArgs e)
+        {
+            string number = nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "");
+            if (nTextBox1.Text.Length != 13) { MessageBox.Show("휴대폰번호를 입력해주세요."); }
+            else
+            {
+                if (DB.IsMember(number))
+                {
+                    if (DB.HasSit(number))
+                    {
+                        //PrinterHelper.RePrint(DB);
+                        Console.WriteLine("영수증 출력 완료.");
+                    }
+                    else { MessageBox.Show("사용중인 고객이 아닙니다."); }
+                }
+                else
+                {
+                    MessageBox.Show("사용중인 고객이 아닙니다.");
+                }
+            }
+        }
     }
 }

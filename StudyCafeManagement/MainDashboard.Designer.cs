@@ -45,9 +45,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.nButton1 = new Nevron.UI.WinForm.Controls.NButton();
             this.nButton2 = new Nevron.UI.WinForm.Controls.NButton();
-            this.nButton3 = new Nevron.UI.WinForm.Controls.NButton();
             this.nButton4 = new Nevron.UI.WinForm.Controls.NButton();
-            this.nButton5 = new Nevron.UI.WinForm.Controls.NButton();
             this.nButton6 = new Nevron.UI.WinForm.Controls.NButton();
             this.nTextBox1 = new Nevron.UI.WinForm.Controls.NTextBox();
             this.nButton7 = new Nevron.UI.WinForm.Controls.NButton();
@@ -65,6 +63,7 @@
             this.nButton19 = new Nevron.UI.WinForm.Controls.NButton();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.nButton3 = new Nevron.UI.WinForm.Controls.NButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -228,21 +227,10 @@
             this.nButton2.UseVisualStyleBackColor = false;
             this.nButton2.Click += new System.EventHandler(this.nButton2_Click);
             // 
-            // nButton3
-            // 
-            this.nButton3.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.nButton3.Location = new System.Drawing.Point(464, 272);
-            this.nButton3.Name = "nButton3";
-            this.nButton3.Palette.Scheme = Nevron.UI.WinForm.Controls.ColorScheme.NevronDefault;
-            this.nButton3.Size = new System.Drawing.Size(146, 128);
-            this.nButton3.TabIndex = 13;
-            this.nButton3.Text = "정기이용권";
-            this.nButton3.UseVisualStyleBackColor = false;
-            // 
             // nButton4
             // 
             this.nButton4.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.nButton4.Location = new System.Drawing.Point(56, 432);
+            this.nButton4.Location = new System.Drawing.Point(174, 432);
             this.nButton4.Name = "nButton4";
             this.nButton4.Palette.Scheme = Nevron.UI.WinForm.Controls.ColorScheme.NevronDefault;
             this.nButton4.Size = new System.Drawing.Size(146, 128);
@@ -251,27 +239,17 @@
             this.nButton4.UseVisualStyleBackColor = false;
             this.nButton4.Click += new System.EventHandler(this.nButton4_Click);
             // 
-            // nButton5
-            // 
-            this.nButton5.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.nButton5.Location = new System.Drawing.Point(257, 432);
-            this.nButton5.Name = "nButton5";
-            this.nButton5.Palette.Scheme = Nevron.UI.WinForm.Controls.ColorScheme.NevronDefault;
-            this.nButton5.Size = new System.Drawing.Size(146, 128);
-            this.nButton5.TabIndex = 15;
-            this.nButton5.Text = "시간연장";
-            this.nButton5.UseVisualStyleBackColor = false;
-            // 
             // nButton6
             // 
             this.nButton6.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.nButton6.Location = new System.Drawing.Point(464, 432);
+            this.nButton6.Location = new System.Drawing.Point(366, 432);
             this.nButton6.Name = "nButton6";
             this.nButton6.Palette.Scheme = Nevron.UI.WinForm.Controls.ColorScheme.NevronDefault;
             this.nButton6.Size = new System.Drawing.Size(146, 128);
             this.nButton6.TabIndex = 16;
             this.nButton6.Text = "퇴실하기";
             this.nButton6.UseVisualStyleBackColor = false;
+            this.nButton6.Click += new System.EventHandler(this.nButton6_Click);
             // 
             // nTextBox1
             // 
@@ -296,6 +274,7 @@
             this.nButton7.TabIndex = 18;
             this.nButton7.Text = "입장하기 / 정기권사용";
             this.nButton7.UseVisualStyleBackColor = false;
+            this.nButton7.Click += new System.EventHandler(this.nButton7_Click);
             // 
             // nButton8
             // 
@@ -465,6 +444,17 @@
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
+            // nButton3
+            // 
+            this.nButton3.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.nButton3.Location = new System.Drawing.Point(464, 272);
+            this.nButton3.Name = "nButton3";
+            this.nButton3.Palette.Scheme = Nevron.UI.WinForm.Controls.ColorScheme.NevronDefault;
+            this.nButton3.Size = new System.Drawing.Size(146, 128);
+            this.nButton3.TabIndex = 13;
+            this.nButton3.Text = "정기이용권";
+            this.nButton3.UseVisualStyleBackColor = false;
+            // 
             // MainDashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -485,7 +475,6 @@
             this.Controls.Add(this.nButton7);
             this.Controls.Add(this.nTextBox1);
             this.Controls.Add(this.nButton6);
-            this.Controls.Add(this.nButton5);
             this.Controls.Add(this.nButton4);
             this.Controls.Add(this.nButton3);
             this.Controls.Add(this.nButton2);
@@ -538,9 +527,7 @@
         private System.Windows.Forms.Label label10;
         private Nevron.UI.WinForm.Controls.NButton nButton1;
         private Nevron.UI.WinForm.Controls.NButton nButton2;
-        private Nevron.UI.WinForm.Controls.NButton nButton3;
         private Nevron.UI.WinForm.Controls.NButton nButton4;
-        private Nevron.UI.WinForm.Controls.NButton nButton5;
         private Nevron.UI.WinForm.Controls.NButton nButton6;
         private Nevron.UI.WinForm.Controls.NTextBox nTextBox1;
         private Nevron.UI.WinForm.Controls.NButton nButton7;
@@ -556,5 +543,6 @@
         private Nevron.UI.WinForm.Controls.NButton nButton17;
         private Nevron.UI.WinForm.Controls.NButton nButton18;
         private Nevron.UI.WinForm.Controls.NButton nButton19;
+        private Nevron.UI.WinForm.Controls.NButton nButton3;
     }
 }

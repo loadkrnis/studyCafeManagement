@@ -54,7 +54,7 @@ namespace StudyCafeManagement
             szString += "                                                                                                                  \n";
             szString += "                                                                                                                  \n";
             string szPrinterName = Program.printerName;
-            string code = "01045671234";
+            string code = DB.PhoneNumber;
             IntPtr pBytes;
             Int32 dwCount;
             // How many characters are in the string?
@@ -108,6 +108,88 @@ namespace StudyCafeManagement
             // Free the unmanaged memory that you allocated earlier.
             Marshal.FreeCoTaskMem(pUnmanagedBytes);
             
+        }
+
+        public static void RePrint(DataAccess DB)
+        {
+            CultureInfo cultures = CultureInfo.CreateSpecificCulture("ko-KR");
+            string date = DateTime.Now.ToString(string.Format("yyyy년 MM월 dd일 ddd요일", cultures));
+            string time;
+            if (DB.SelectTime == "day") time = "24시간";
+            else time = DB.SelectTime + "시간";
+            string charge = String.Format("{0:#,0}", Convert.ToInt32(DB.SelectCharge));
+            string supply = String.Format("{0:#,0}", (Convert.ToInt32(DB.SelectCharge) * 0.1));
+            string vat = String.Format("{0:#,0}", (Convert.ToInt32(DB.SelectCharge) * 0.9));
+
+            string szString = "SAM4S(C)" + "\n\n";
+            szString += "777-77-77777  BONG\n";
+            szString += DB.BrachAddress + "\n";
+            szString += "Tel : 010-4261-4444\n";
+            szString += date + "  No." + DB.BranchId + DateTime.Now.ToString(string.Format("yyyyMMdd", cultures)) + "\n\n";
+            szString += "신문화를 창조하는 Book & Cup \n";
+            szString += "항상 최고로 모시겠습니다.\n\n";
+            szString += "본 바코드는 스터디카페 입장시 필요합니다.\n";
+            szString += "잘 보관하시기 바랍니다. 감사합니다.";
+            szString += "------------------------------------------\n";
+            szString += "             바 코 드 재 발 급          \n";
+            szString += "------------------------------------------\n\n";
+            szString += "                                                                                                                  \n";
+            szString += "                                                                                                                  \n";
+            string szPrinterName = Program.printerName;
+            string code = DB.PhoneNumber;
+            IntPtr pBytes;
+            Int32 dwCount;
+            // How many characters are in the string?
+            dwCount = szString.Length;
+            // Assume that the printer is expecting ANSI text, and then convert
+            // the string to ANSI text.
+            pBytes = Marshal.StringToCoTaskMemAnsi(szString);
+            // Send the converted ANSI string to the printer.
+            SendBytesToPrinter(szPrinterName, pBytes, dwCount);
+            Marshal.FreeCoTaskMem(pBytes);
+
+
+
+
+
+            string testStr = code;
+            byte[] tempByte = Encoding.Default.GetBytes(testStr);
+
+            Byte[] bytes = new Byte[tempByte.Length + 7];
+            bool bSuccess = false;
+
+            // Your unmanaged pointer.
+            IntPtr pUnmanagedBytes = new IntPtr(0);
+            int nLength;
+
+            nLength = bytes.Length;
+
+            // Set Barcode Height
+            bytes[0] = 29;
+            bytes[1] = 104;
+            bytes[2] = 90;
+
+            // Print Barcode
+            bytes[3] = 29;
+            bytes[4] = 107;
+            // Barcode Type : Code128
+            bytes[5] = 73;
+            bytes[6] = (byte)tempByte.Length;
+
+            for (int i = 0; i < tempByte.Length; i++)
+            {
+                bytes[7 + i] = tempByte[i];
+            }
+
+            // Allocate some unmanaged memory for those bytes.
+            pUnmanagedBytes = Marshal.AllocCoTaskMem(nLength);
+            // Copy the managed byte array into the unmanaged array.
+            Marshal.Copy(bytes, 0, pUnmanagedBytes, nLength);
+            // Send the unmanaged bytes to the printer.
+            bSuccess = SendBytesToPrinter(Program.printerName, pUnmanagedBytes, nLength);
+            // Free the unmanaged memory that you allocated earlier.
+            Marshal.FreeCoTaskMem(pUnmanagedBytes);
+
         }
         // Structure and API declarions:
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
