@@ -129,12 +129,12 @@ namespace StudyCafeManagement
             szString += "신문화를 창조하는 Book & Cup \n";
             szString += "항상 최고로 모시겠습니다.\n\n";
             szString += "본 바코드는 스터디카페 입장시 필요합니다.\n";
-            szString += "잘 보관하시기 바랍니다. 감사합니다.";
+            szString += "잘 보관하시기 바랍니다. 감사합니다.\n";
             szString += "------------------------------------------\n";
             szString += "             바 코 드 재 발 급          \n";
-            szString += "------------------------------------------\n\n";
-            szString += "                                                                                                                  \n";
-            szString += "                                                                                                                  \n";
+            szString += "------------------------------------------";
+            szString += "                                                                                                                  ";
+            szString += "                                                                                                                  ";
             string szPrinterName = Program.printerName;
             string code = DB.PhoneNumber;
             IntPtr pBytes;
@@ -198,7 +198,7 @@ namespace StudyCafeManagement
             [MarshalAs(UnmanagedType.LPStr)]
             public string pDocName;
             [MarshalAs(UnmanagedType.LPStr)]
-            public string pOutputFile;
+            public string pOutputFile;  
             [MarshalAs(UnmanagedType.LPStr)]
             public string pDataType;
         }

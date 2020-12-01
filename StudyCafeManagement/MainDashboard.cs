@@ -231,8 +231,7 @@ namespace StudyCafeManagement
                 {
                     if (DB.HasSit(number))
                     {
-                        //PrinterHelper.RePrint(DB);
-                        Console.WriteLine("영수증 출력 완료.");
+                        PrinterHelper.RePrint(DB);
                     }
                     else { MessageBox.Show("사용중인 고객이 아닙니다."); }
                 }

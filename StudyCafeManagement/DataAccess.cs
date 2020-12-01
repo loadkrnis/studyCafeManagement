@@ -316,6 +316,7 @@ namespace StudyCafeManagement
             else
             {
                 member_id = DS.Tables["User"].Rows[0]["member_id"].ToString();
+                PhoneNumber = number;
                 adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' and member_id='" + member_id + "'", conn);
                 adapter.Fill(DS, "Sit");
                 if(DS.Tables["Sit"].Rows.Count == 1)
