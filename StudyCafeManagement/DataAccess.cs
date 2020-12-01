@@ -311,7 +311,7 @@ namespace StudyCafeManagement
             adapter.Fill(DS, "User");
             if(DS.Tables["User"].Rows.Count == 0)
             {
-                return false;
+                return false; 
             }
             else
             {
