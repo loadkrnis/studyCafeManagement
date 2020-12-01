@@ -36,27 +36,29 @@ namespace StudyCafeManagement
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             DrawSit(new Sit(e.X, e.Y, 7, 'T'));
-            
-            for(int i = 0; i < FalseSitArr.Length; i++)
-             {
-                 if((e.X >= FalseSitArr[i].x && e.X <= FalseSitArr[i].x+40) && (e.Y >= FalseSitArr[i].y && e.Y <= FalseSitArr[i].y + 35))
-                 {
+
+            for (int i = 0; i < FalseSitArr.Length+1; i++)
+            {
+                if ((e.X >= FalseSitArr[i].x && e.X <= FalseSitArr[i].x + 40) && (e.Y >= FalseSitArr[i].y && e.Y <= FalseSitArr[i].y + 35))
+                {
                     MessageBox.Show(FalseSitArr[i].num + "번 좌석을 선택하였습니다.");
                     DB.SelectSitNumber = FalseSitArr[i].num.ToString();
-                    if(DB.IsChange == true)
+                    if (DB.IsChange == true)
                     {
-
+                        DB.ChangeSit();
+                        DB.IsChange = false;
                     }
-                    else if(DB.IsChange == false) { 
-                    PhoneAuth p = new PhoneAuth(DB);
-                    p.Owner = this.Owner;
-                    p.ShowDialog();
+                    else if (DB.IsChange == false)
+                    {
+                        PhoneAuth p = new PhoneAuth(DB);
+                        p.Owner = this.Owner;
+                        p.ShowDialog();
                     }
                     Dispose();
                     break;
-                 }
-             }
-             
+                }
+            }
+
 
         }
 
@@ -94,7 +96,7 @@ namespace StudyCafeManagement
             g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
             SitArr = DB.GetSits();
             FalseSitArr = DB.GetFalseSits();
-            for(int i = 0; i < SitArr.Length; i++)
+            for (int i = 0; i < SitArr.Length; i++)
             {
                 DrawSit(SitArr[i]);
             }

@@ -177,18 +177,21 @@ namespace StudyCafeManagement
 
         private void nButton4_Click(object sender, EventArgs e)
         {
+            string number = nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "");
             if (nTextBox1.Text.Length != 13) { MessageBox.Show("하단에 휴대폰번호를 입력해주세요."); }
             else
             {
-                if(DB.IsMember(nTextBox1.Text.Replace("-","").Replace("-","").Replace("","")))
+                if (DB.IsMember(number))
                 {
-                    //if(DB.HasSit("01044444444")) { 
-                    DB.IsChange = true;
-                    SelectSit s = new SelectSit(DB);
-                    s.Owner = this;
-                    s.ShowDialog();
-                    //}
-                    //else { MessageBox.Show("사용중인 고객이 아닙니다."); }
+                    if (DB.HasSit(number))
+                    {
+                        Console.WriteLine("DB.BeforeSit : " + DB.BeforeSit);
+                        DB.IsChange = true;
+                        SelectSit s = new SelectSit(DB);
+                        s.Owner = this;
+                        s.ShowDialog();
+                    }
+                    else { MessageBox.Show("사용중인 고객이 아닙니다."); }
                 }
                 else
                 {

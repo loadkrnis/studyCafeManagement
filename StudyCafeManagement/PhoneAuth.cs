@@ -58,7 +58,6 @@ namespace StudyCafeManagement
                         }
                         Console.WriteLine(authNumber);
                     }
-
                 }
                 else
                 {

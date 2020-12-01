@@ -36,6 +36,12 @@ namespace StudyCafeManagement
         private string[] hourTime;
         private string branch_address;
         private bool isChange = false;
+        private string beforeSit;
+        public string BeforeSit
+        {
+            get { return beforeSit; }
+            set { beforeSit = value; }
+        }
         public bool IsChange
         {
             get { return isChange; }
@@ -233,6 +239,7 @@ namespace StudyCafeManagement
                 if(DateTime.Compare(sitTime, now) <= 0)
                 {
                     DS.Tables["Sit"].Rows[i]["is_used"] = 'F';
+                    DS.Tables["Sit"].Rows[i]["member_id"] = "0";
                 }
                 x = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_x"]);
                 y = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_y"]);
@@ -252,13 +259,15 @@ namespace StudyCafeManagement
             int x;
             int y;
             char isUsed;
+            int sitNum;
             Sit[] result = new Sit[DS.Tables["Sit"].Rows.Count];
             for (int i = 0; i < result.Length; i++)
             {
                 x = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_x"]);
                 y = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["location_y"]);
                 isUsed = Convert.ToChar(DS.Tables["Sit"].Rows[i]["is_used"]);
-                result[i] = new Sit(x, y, i + 1, isUsed);
+                sitNum = Convert.ToInt32(DS.Tables["Sit"].Rows[i]["sit_num"]);
+                result[i] = new Sit(x, y, sitNum, isUsed);
             }
             return result;
         }
@@ -291,12 +300,52 @@ namespace StudyCafeManagement
             DS.Tables["Sit"].Rows[0]["member_id"] = member_id;
             adapter.Update(DS, "Sit");
             DS.AcceptChanges();
-
-
-
             UpdateSit();
-
             return true;
+        }
+
+        public bool HasSit(string number)
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from member where phone_number='" + number + "'", conn);
+            adapter.Fill(DS, "User");
+            if(DS.Tables["User"].Rows.Count == 0)
+            {
+                return false;
+            }
+            else
+            {
+                member_id = DS.Tables["User"].Rows[0]["member_id"].ToString();
+                adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' and member_id='" + member_id + "'", conn);
+                adapter.Fill(DS, "Sit");
+                if(DS.Tables["Sit"].Rows.Count == 1)
+                {
+                    BeforeSit = DS.Tables["Sit"].Rows[0]["sit_num"].ToString();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+                
+            }
+        }
+
+        public void ChangeSit()
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "'", conn);
+            adapter.Fill(DS, "Sit");
+            DS.Tables["Sit"].Select("sit_num='" + SelectSitNumber + "'")[0]["end_at"] = DS.Tables["Sit"].Select("member_id='" + member_id + "'")[0]["end_at"];
+            DS.Tables["Sit"].Select("sit_num='" + SelectSitNumber + "'")[0]["member_id"] = member_id;
+            DS.Tables["Sit"].Select("sit_num='" + SelectSitNumber + "'")[0]["is_used"] = 'T';
+            DS.Tables["Sit"].Select("member_id='" + member_id + "' and sit_num='"+BeforeSit+"'")[0]["end_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            DS.Tables["Sit"].Select("member_id='" + member_id + "' and sit_num='" + BeforeSit + "'")[0]["is_used"] = 'F';
+            DS.Tables["Sit"].Select("member_id='" + member_id + "' and sit_num='" + BeforeSit + "'")[0]["member_id"] = "0";
+            Console.WriteLine("ChangeSit : " + BeforeSit + " => " + SelectSitNumber);
+            adapter.Update(DS, "Sit");
+            DS.AcceptChanges();
+            UpdateSit();
         }
 
     }
