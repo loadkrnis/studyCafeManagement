@@ -35,9 +35,16 @@ namespace StudyCafeManagement
             if(db.CheckIdPwd(textBox1.Text.ToString(), textBox2.Text.ToString()))
             {
                 this.Visible = false;
-                MainDashboard dash = new MainDashboard(db);
-                dash.Owner = this;
-                dash.ShowDialog();
+                if (checkBox1.Checked == true)
+                {
+                    //관리자모드
+                }
+                else
+                {
+                    MainDashboard dash = new MainDashboard(db);
+                    dash.Owner = this;
+                    dash.ShowDialog();
+                }
             }
             else {
             MessageBox.Show("아이디 또는 비밀번호 오류입니다.");

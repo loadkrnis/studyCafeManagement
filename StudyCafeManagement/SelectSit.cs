@@ -36,7 +36,6 @@ namespace StudyCafeManagement
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
             DrawSit(new Sit(e.X, e.Y, 7, 'T'));
-
             for (int i = 0; i < FalseSitArr.Length+1; i++)
             {
                 if ((e.X >= FalseSitArr[i].x && e.X <= FalseSitArr[i].x + 40) && (e.Y >= FalseSitArr[i].y && e.Y <= FalseSitArr[i].y + 35))
@@ -58,8 +57,6 @@ namespace StudyCafeManagement
                     break;
                 }
             }
-
-
         }
 
         private void DrawSit(Sit sit)

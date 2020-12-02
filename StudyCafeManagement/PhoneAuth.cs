@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CoolSms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,6 +45,12 @@ namespace StudyCafeManagement
                     else
                     {
                         MessageBox.Show("회원이 아닙니다.\n인증번호를 발송하였습니다.");
+                        SmsApi api = new SmsApi(new SmsApiOptions
+                        {
+                            ApiKey = "NCSMQ16BEMIBHLCG",
+                            ApiSecret = "QQEUWNUOMWSLFNEJQ05D2ABQE5NDFXPE",
+                            DefaultSenderId = "01042614444" // 문자 보내는 사람 번호, coolsms 홈페이지에서 발신자 등록한 번호 필수
+                        });
                         nTextBox1.Location = new System.Drawing.Point(nTextBox1.Location.X, nTextBox1.Location.Y - 66);
                         nTextBox1.Enabled = false;
                         nTextBox2.Visible = true;
@@ -57,6 +64,8 @@ namespace StudyCafeManagement
                             authNumber += random.Next(0, 10).ToString();
                         }
                         Console.WriteLine(authNumber);
+                        Console.WriteLine("Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
+                        //api.SendMessageAsync(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", ""), "Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
                     }
                 }
                 else
