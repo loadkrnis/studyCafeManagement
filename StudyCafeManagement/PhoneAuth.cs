@@ -49,7 +49,7 @@ namespace StudyCafeManagement
                         {
                             ApiKey = "NCSMQ16BEMIBHLCG",
                             ApiSecret = "QQEUWNUOMWSLFNEJQ05D2ABQE5NDFXPE",
-                            DefaultSenderId = "01042614444" // 문자 보내는 사람 번호, coolsms 홈페이지에서 발신자 등록한 번호 필수
+                            DefaultSenderId = "01042614444"
                         });
                         nTextBox1.Location = new System.Drawing.Point(nTextBox1.Location.X, nTextBox1.Location.Y - 66);
                         nTextBox1.Enabled = false;

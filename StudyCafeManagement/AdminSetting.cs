@@ -12,7 +12,7 @@ namespace StudyCafeManagement
 {
     public partial class AdminSetting : Form
     {
-        public AdminSetting()
+        public AdminSetting(DataAccess DB)
         {
             InitializeComponent();
         }

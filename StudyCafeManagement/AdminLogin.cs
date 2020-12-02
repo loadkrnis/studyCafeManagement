@@ -38,6 +38,10 @@ namespace StudyCafeManagement
                 if (checkBox1.Checked == true)
                 {
                     //관리자모드
+                    AdminSetting adminSetting = new AdminSetting(DB);
+                    adminSetting.Owner = this;
+                    adminSetting.ShowDialog();
+                    
                 }
                 else
                 {
