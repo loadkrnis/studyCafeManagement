@@ -60,6 +60,7 @@ namespace StudyCafeManagement
         public string BranchName
         {
             get { return branch_name; }
+            set { branch_name = value; }
         }
         private string total_sit;
         public string TotalSit
@@ -67,10 +68,7 @@ namespace StudyCafeManagement
             get { return total_sit; }
         }
         private string using_sit;
-        public string UsingSit
-        {
-            get { return using_sit; }
-        }
+        public string UsingSit;
         private string dayCharge;
         public string DayCharge
         {
@@ -117,6 +115,12 @@ namespace StudyCafeManagement
             get { return ceo_password; }
             set { ceo_password = value; }
         }
+        private string ceo_name;
+        public string CeoName
+        {
+            get { return ceo_name; }
+            set { ceo_name = value; }
+        }
 
         public DataAccess(string id, string pwd)
         {
@@ -149,6 +153,7 @@ namespace StudyCafeManagement
                 branch_id = ResultRows[0]["id"].ToString();
                 branch_name = ResultRows[0]["name"].ToString();
                 branch_address = ResultRows[0]["address"].ToString();
+                ceo_name = ResultRows[0]["ceo_name"].ToString();
                 DS.Clear();
                 UpdateSit();
 
@@ -393,6 +398,33 @@ namespace StudyCafeManagement
             Console.WriteLine("after : " + id + ", " + pwd);
             ceo_id = id;
             ceo_password = pwd;
+        }
+        public void ChangeBranchInfo(ChangeBranchInfo branch)
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from branch where id='" + branch_id + "'", conn);
+            adapter.Fill(DS, "Branch");
+            DS.Tables["Branch"].Rows[0]["name"] = branch.BranchName;
+            DS.Tables["Branch"].Rows[0]["address"] = branch.Address;
+            DS.Tables["Branch"].Rows[0]["ceo_name"] = branch.Ceo;
+            BranchName = branch.BranchName;
+            branch_address = branch.Address;
+            ceo_name = branch.Ceo;
+            adapter.Update(DS, "Branch");
+            DS.AcceptChanges();
+        }
+        public void ChangeChargeInfo(AdminSetting admin)
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from charge_plan where branch_id='" + branch_id + "' order  by time", conn);
+            adapter.Fill(DS, "ChargePlan");
+            DS.Tables["ChargePlan"].Select("time<>'day'")[0]["charge"] = admin.HourPay1;
+            DS.Tables["ChargePlan"].Select("time<>'day'")[1]["charge"] = admin.HourPay2;
+            DS.Tables["ChargePlan"].Select("time<>'day'")[2]["charge"] = admin.HourPay3;
+            DS.Tables["ChargePlan"].Select("time = 'day'")[0]["charge"] = admin.DayPay;
+            adapter.Update(DS, "ChargePlan");
+            DS.AcceptChanges();
+            MessageBox.Show("가격수정이 완료되었습니다.");
         }
     }
 }
