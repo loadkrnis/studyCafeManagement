@@ -21,3 +21,4 @@ C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.Pho
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.SelectSit.resources
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.Print.resources
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.AdminSetting.resources
+C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.ChangeLoginInfo.resources

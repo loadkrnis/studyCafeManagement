@@ -20,81 +20,102 @@ namespace StudyCafeManagement
         DataTable branchTable;
         DataTable sitTable;
         private OracleConnection conn;
-
         public string bug;
         private string member_id;
+        public string MemberId
+        {
+            get { return member_id; }
+            set { member_id = value; }
+        }
         private string phone_number;
+        public string PhoneNumber
+        {
+            get { return phone_number; }
+            set { phone_number = value; }
+        }
         private string selectSitNumber;
+        public string SelectSitNumber
+        {
+            get { return selectSitNumber; }
+            set { selectSitNumber = value; }
+        }
         private string selectTime;
+        public string SelectTime
+        {
+            get { return selectTime; }
+            set { selectTime = value; }
+        }
         private string selectCharge;
+        public string SelectCharge
+        {
+            get { return selectCharge; }
+            set { selectCharge = value; }
+        }
         private string branch_id;
+        public string BranchId
+        {
+            get { return branch_id; }
+        }
         private string branch_name;
+        public string BranchName
+        {
+            get { return branch_name; }
+        }
         private string total_sit;
+        public string TotalSit
+        {
+            get { return total_sit; }
+        }
         private string using_sit;
+        public string UsingSit
+        {
+            get { return using_sit; }
+        }
         private string dayCharge;
+        public string DayCharge
+        {
+            get { return dayCharge; }
+        }
         private string[] hourCharge;
+        public string[] HourCharge
+        {
+            get { return hourCharge; }
+        }
         private string[] hourTime;
+        public string[] HourTime
+        {
+            get { return hourTime; }
+            set { hourTime = value; }
+        }
         private string branch_address;
+        public string BrachAddress
+        {
+            get { return branch_address; }
+            set { branch_address = value; }
+        }
         private bool isChange = false;
+        public bool IsChange
+        {
+            get { return isChange; }
+            set { isChange = value; }
+        }
         private string beforeSit;
         public string BeforeSit
         {
             get { return beforeSit; }
             set { beforeSit = value; }
         }
-        public bool IsChange
+        private string ceo_id;
+        public string CeoID
         {
-            get { return isChange; }
-            set { isChange = value; }
+            get { return ceo_id; }
+            set { ceo_id = value; }
         }
-        public string[] HourTime
+        private string ceo_password;
+        public string CeoPWD
         {
-            get { return hourTime; }
-            set { hourTime = value; }
-        }
-        public string BrachAddress
-        {
-            get { return branch_address; }
-            set { branch_address = value; }
-        }
-        public string DayCharge
-        {
-            get { return dayCharge; }
-        }
-        public string[] HourCharge
-        {
-            get { return hourCharge; }
-        }
-        public string TotalSit
-        {
-            get { return total_sit; }
-        }
-        public string UsingSit
-        {
-            get { return using_sit; }
-        }
-        public string BranchName
-        {
-            get { return branch_name; }
-        }
-        public string BranchId
-        {
-            get { return branch_id; }
-        }
-        public string SelectSitNumber
-        {
-            get { return selectSitNumber; }
-            set { selectSitNumber = value; }
-        }
-        public string SelectTime
-        {
-            get { return selectTime; }
-            set { selectTime = value; }
-        }
-        public string SelectCharge
-        {
-            get { return selectCharge; }
-            set { selectCharge = value; }
+            get { return ceo_password; }
+            set { ceo_password = value; }
         }
 
         public DataAccess(string id, string pwd)
@@ -114,13 +135,6 @@ namespace StudyCafeManagement
                 MessageBox.Show(DE.Message);
             }
         }
-
-        public string PhoneNumber
-        {
-            get { return phone_number; }
-            set { phone_number = value; }
-        }
-
         public bool CheckIdPwd(string id, string pwd)
         {
             adapter.Fill(DS, "Branch");
@@ -151,13 +165,13 @@ namespace StudyCafeManagement
                     hourCharge[i] = ResultRows[i]["charge"].ToString();
                     hourTime[i] = ResultRows[i]["time"].ToString();
                 }
-
+                ceo_id = id;
+                ceo_password = pwd;
                 return true;
             }
             else
                 return false;
         }
-
         public void UpdateSit()
         {
             DS.Clear();
@@ -167,7 +181,6 @@ namespace StudyCafeManagement
             total_sit = sitTable.Select("1=1").Length.ToString();
             using_sit = sitTable.Select("is_used = 'T'").Length.ToString();
         }
-
         public bool IsMember(string number)
         {
             adapter.SelectCommand = new OracleCommand("select * from member where phone_number = '" + number + "'", conn);
@@ -183,7 +196,6 @@ namespace StudyCafeManagement
                 return false;
             }
         }
-
         public bool InsertMember(string number)
         {
             try
@@ -210,7 +222,6 @@ namespace StudyCafeManagement
             }
             return false;
         }
-
         public Sit[] GetSits()
         {
             DS.Clear();
@@ -250,7 +261,6 @@ namespace StudyCafeManagement
             DS.AcceptChanges();
             return result;
         }
-
         public Sit[] GetFalseSits()
         {
             DS.Clear();
@@ -271,7 +281,6 @@ namespace StudyCafeManagement
             }
             return result;
         }
-
         public bool InsertSale()
         {
             DS.Clear();
@@ -303,7 +312,6 @@ namespace StudyCafeManagement
             UpdateSit();
             return true;
         }
-
         public bool HasSit(string number)
         {
             DS.Clear();
@@ -332,7 +340,6 @@ namespace StudyCafeManagement
                 
             }
         }
-
         public void ChangeSit()
         {
             DS.Clear();
@@ -372,6 +379,20 @@ namespace StudyCafeManagement
             PhoneNumber = DS.Tables["Member"].Rows[0]["phone_number"].ToString();
             Console.WriteLine("PhoneNumber : "+PhoneNumber);
             return true;
+        }
+        public void ChangeLoginInfo(string id, string pwd)
+        {
+            DS.Clear();
+            adapter.SelectCommand = new OracleCommand("select * from branch where id='" + branch_id + "'", conn);
+            adapter.Fill(DS, "Login");
+            DS.Tables["Login"].Rows[0]["ceo_id"] = id;
+            DS.Tables["Login"].Rows[0]["ceo_password"] = pwd;
+            adapter.Update(DS,"Login");
+            DS.AcceptChanges();
+            Console.WriteLine("before : " + ceo_id + ", " + ceo_password);
+            Console.WriteLine("after : " + id + ", " + pwd);
+            ceo_id = id;
+            ceo_password = pwd;
         }
     }
 }

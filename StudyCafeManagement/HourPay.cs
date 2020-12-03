@@ -13,7 +13,6 @@ namespace StudyCafeManagement
     public partial class HourPay : Form
     {
         private DataAccess DB;
-        private string first;
         public HourPay(DataAccess db)
         {
             InitializeComponent();
