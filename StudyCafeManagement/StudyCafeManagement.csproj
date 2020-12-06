@@ -99,6 +99,12 @@
     <Compile Include="DayPay.Designer.cs">
       <DependentUpon>DayPay.cs</DependentUpon>
     </Compile>
+    <Compile Include="EditSit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EditSit.Designer.cs">
+      <DependentUpon>EditSit.cs</DependentUpon>
+    </Compile>
     <Compile Include="HourPay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DayPay.resx">
       <DependentUpon>DayPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EditSit.resx">
+      <DependentUpon>EditSit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HourPay.resx">
       <DependentUpon>HourPay.cs</DependentUpon>

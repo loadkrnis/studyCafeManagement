@@ -14,7 +14,9 @@ namespace StudyCafeManagement
     public partial class AdminSetting : Form
     {
         Graphics g;
+        List<Sit> SitList = null;
         Sit[] SitArr;
+
         DataAccess db;
         public DataAccess DB
         {
@@ -70,6 +72,11 @@ namespace StudyCafeManagement
         {
             get { return textBox4.Text; }
             set { textBox4.Text = value; }
+        }
+        public ListView SitListView
+        {
+            get { return listView1; }
+            set { listView1 = value; }
         }
         private bool IsOnClick = false;
         private Point MouseOnClickPosition = new Point();
@@ -235,20 +242,56 @@ namespace StudyCafeManagement
                             MouseOnClickPosition.Y = e.Y;
                             Console.WriteLine("MouseMove => SirArr[i].X:" + SitArr[i].x + " SitArr[i].Y:" + SitArr[i].y);
                             item = new ListViewItem(SitArr[i].num.ToString());
-                            item.SubItems.Add(SitArr[i].x.ToString());
-                            item.SubItems.Add(SitArr[i].y.ToString());
-                            item.SubItems.Add(SitArr[i].isUsed == 'T' ? "사용중" : "사용가능");
-                            listView1.Items[i] = item;
+                            listView1.Items[i].SubItems[1].Text = SitArr[i].x.ToString();
+                            listView1.Items[i].SubItems[2].Text = SitArr[i].y.ToString();
                             for (int j = 0; j < SitArr.Length; j++)
                             {
                                 DrawSit(SitArr[j]);
                             }
                         }
-                        
+
                     }
                 }
                 catch (Exception) { }
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DB.ModifySit(listView1.Items);
+            MessageBox.Show("저장되었습니다.");
+        }
+
+        private void 추가ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SitList = SitArr.ToList<Sit>();
+
+            ListViewItem item = new ListViewItem((listView1.Items.Count + 1).ToString());
+            //item.Text = listView1.Items.Count.ToString();
+            item.SubItems.Add("10");
+            item.SubItems.Add("10");
+            item.SubItems.Add("사용가능");
+            listView1.Items.Add(item);
+            SitList.Add(new Sit(10, 10, listView1.Items.Count, 'F'));
+            SitArr = SitList.ToArray();
+            Bitmap canvas;
+            canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = canvas;
+            pictureBox1.Size = canvas.Size;
+            g = Graphics.FromImage(pictureBox1.Image);
+            g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
+            for (int i = 0; i < SitArr.Length; i++)
+            {
+                DrawSit(SitArr[i]);
+            }
+        }
+
+        private void 수정ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            EditSit es = new EditSit();
+            es.Owner = this;
+            es.ShowDialog();
         }
     }
 }

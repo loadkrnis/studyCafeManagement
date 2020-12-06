@@ -249,10 +249,10 @@ namespace StudyCafeManagement
                 {
                     Date = temp.Substring(0, 10).Split('-');
                     Time = (temp.Trim()).Substring(13).Split(':');
-                    if (temp.Substring(11, 2) == "오후") sitTime = new DateTime(Convert.ToInt32(Date[0]), Convert.ToInt32(Date[1]), Convert.ToInt32(Date[2]), Convert.ToInt32(Time[0])+12, Convert.ToInt32(Time[1]), Convert.ToInt32(Time[2]));
+                    if (temp.Substring(11, 2) == "오후") sitTime = new DateTime(Convert.ToInt32(Date[0]), Convert.ToInt32(Date[1]), Convert.ToInt32(Date[2]), Convert.ToInt32(Time[0]) + 12, Convert.ToInt32(Time[1]), Convert.ToInt32(Time[2]));
                     else sitTime = new DateTime(Convert.ToInt32(Date[0]), Convert.ToInt32(Date[1]), Convert.ToInt32(Date[2]), Convert.ToInt32(Time[0]), Convert.ToInt32(Time[1]), Convert.ToInt32(Time[2]));
                 }
-                if(DateTime.Compare(sitTime, now) <= 0)
+                if (DateTime.Compare(sitTime, now) <= 0)
                 {
                     DS.Tables["Sit"].Rows[i]["is_used"] = 'F';
                     DS.Tables["Sit"].Rows[i]["member_id"] = "0";
@@ -322,9 +322,9 @@ namespace StudyCafeManagement
             DS.Clear();
             adapter.SelectCommand = new OracleCommand("select * from member where phone_number='" + number + "'", conn);
             adapter.Fill(DS, "User");
-            if(DS.Tables["User"].Rows.Count == 0)
+            if (DS.Tables["User"].Rows.Count == 0)
             {
-                return false; 
+                return false;
             }
             else
             {
@@ -332,7 +332,7 @@ namespace StudyCafeManagement
                 PhoneNumber = number;
                 adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' and member_id='" + member_id + "'", conn);
                 adapter.Fill(DS, "Sit");
-                if(DS.Tables["Sit"].Rows.Count == 1)
+                if (DS.Tables["Sit"].Rows.Count == 1)
                 {
                     BeforeSit = DS.Tables["Sit"].Rows[0]["sit_num"].ToString();
                     SelectSitNumber = BeforeSit;
@@ -342,7 +342,7 @@ namespace StudyCafeManagement
                 {
                     return false;
                 }
-                
+
             }
         }
         public void ChangeSit()
@@ -353,7 +353,7 @@ namespace StudyCafeManagement
             DS.Tables["Sit"].Select("sit_num='" + SelectSitNumber + "'")[0]["end_at"] = DS.Tables["Sit"].Select("member_id='" + member_id + "'")[0]["end_at"];
             DS.Tables["Sit"].Select("sit_num='" + SelectSitNumber + "'")[0]["member_id"] = member_id;
             DS.Tables["Sit"].Select("sit_num='" + SelectSitNumber + "'")[0]["is_used"] = 'T';
-            DS.Tables["Sit"].Select("member_id='" + member_id + "' and sit_num='"+BeforeSit+"'")[0]["end_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            DS.Tables["Sit"].Select("member_id='" + member_id + "' and sit_num='" + BeforeSit + "'")[0]["end_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             DS.Tables["Sit"].Select("member_id='" + member_id + "' and sit_num='" + BeforeSit + "'")[0]["is_used"] = 'F';
             DS.Tables["Sit"].Select("member_id='" + member_id + "' and sit_num='" + BeforeSit + "'")[0]["member_id"] = "0";
             Console.WriteLine("ChangeSit : " + BeforeSit + " => " + SelectSitNumber);
@@ -378,7 +378,7 @@ namespace StudyCafeManagement
             DS.Clear();
             adapter.SelectCommand = new OracleCommand("select * from sit where member_id='" + member_id + "'", conn);
             adapter.Fill(DS, "Sit");
-            if(DS.Tables["Sit"].Rows.Count == 0) { return false; }
+            if (DS.Tables["Sit"].Rows.Count == 0) { return false; }
             adapter.SelectCommand = new OracleCommand("select * from member where member_id='" + member_id + "'", conn);
             adapter.Fill(DS, "Member");
             PhoneNumber = DS.Tables["Member"].Rows[0]["phone_number"].ToString();
@@ -391,7 +391,7 @@ namespace StudyCafeManagement
             adapter.Fill(DS, "Login");
             DS.Tables["Login"].Rows[0]["ceo_id"] = id;
             DS.Tables["Login"].Rows[0]["ceo_password"] = pwd;
-            adapter.Update(DS,"Login");
+            adapter.Update(DS, "Login");
             DS.AcceptChanges();
             Console.WriteLine("before : " + ceo_id + ", " + ceo_password);
             Console.WriteLine("after : " + id + ", " + pwd);
@@ -424,6 +424,40 @@ namespace StudyCafeManagement
             adapter.Update(DS, "ChargePlan");
             DS.AcceptChanges();
             MessageBox.Show("가격수정이 완료되었습니다.");
+        }
+        public void ModifySit(ListView.ListViewItemCollection items)
+        {
+            DS.Clear();
+            DataRow row = null;
+            adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' order by sit_num asc", conn);
+            adapter.Fill(DS, "Sit");
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (i >= DS.Tables["Sit"].Rows.Count)
+                {
+                    DataRow newRow = DS.Tables["Sit"].NewRow();
+                    newRow["sit_num"] = i + 1;
+                    newRow["branch_id"] = branch_id;
+                    newRow["is_used"] = 'F';
+                    newRow["location_x"] = items[i].SubItems[1].Text;
+                    newRow["location_y"] = items[i].SubItems[2].Text;
+                    DS.Tables["Sit"].Rows.Add(newRow);
+                    continue;
+                }
+                row = DS.Tables["Sit"].Rows[i];
+                if (row["sit_num"].ToString() == items[i].SubItems[0].Text)
+                {
+                    if (row["location_x"].ToString() != items[i].SubItems[1].Text || row["location_y"].ToString() != items[i].SubItems[2].Text)
+                    {
+                        Console.WriteLine("row[\"location_x\"]:" + row["location_x"] + "  items[i].SubItems[1]:" + items[i].SubItems[1].Text);
+                        Console.WriteLine("row[\"location_y\"]:" + row["location_y"] + "  items[i].SubItems[2]:" + items[i].SubItems[2].Text);
+                        DS.Tables["Sit"].Rows[i]["location_x"] = Convert.ToInt32(items[i].SubItems[1].Text);
+                        DS.Tables["Sit"].Rows[i]["location_y"] = Convert.ToInt32(items[i].SubItems[2].Text);
+                    }
+                }
+            }
+            adapter.Update(DS, "Sit");
+            DS.AcceptChanges();
         }
     }
 }

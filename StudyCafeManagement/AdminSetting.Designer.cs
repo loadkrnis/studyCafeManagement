@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "1",
             "20",
@@ -60,11 +61,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button4 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.추가ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.수정ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.삭제ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -78,6 +84,7 @@
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPage4.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -399,6 +406,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button4);
             this.tabPage2.Controls.Add(this.listView1);
             this.tabPage2.Controls.Add(this.pictureBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
@@ -410,6 +418,17 @@
             this.tabPage2.UseVisualStyleBackColor = true;
             this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
+            // button4
+            // 
+            this.button4.Font = new System.Drawing.Font("나눔고딕 ExtraBold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.button4.Location = new System.Drawing.Point(825, 780);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(101, 32);
+            this.button4.TabIndex = 9;
+            this.button4.Text = "저 장";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // listView1
             // 
             this.listView1.Alignment = System.Windows.Forms.ListViewAlignment.Left;
@@ -418,13 +437,14 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listView1.ContextMenuStrip = this.contextMenuStrip1;
             this.listView1.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.listView1.HideSelection = false;
             this.listView1.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.listView1.Location = new System.Drawing.Point(703, 6);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(337, 804);
+            this.listView1.Size = new System.Drawing.Size(337, 759);
             this.listView1.TabIndex = 8;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -448,6 +468,35 @@
             // 
             this.columnHeader4.Text = "사용여부";
             this.columnHeader4.Width = 105;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.추가ToolStripMenuItem,
+            this.수정ToolStripMenuItem,
+            this.삭제ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 92);
+            // 
+            // 추가ToolStripMenuItem
+            // 
+            this.추가ToolStripMenuItem.Name = "추가ToolStripMenuItem";
+            this.추가ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.추가ToolStripMenuItem.Text = "추가";
+            this.추가ToolStripMenuItem.Click += new System.EventHandler(this.추가ToolStripMenuItem_Click);
+            // 
+            // 수정ToolStripMenuItem
+            // 
+            this.수정ToolStripMenuItem.Name = "수정ToolStripMenuItem";
+            this.수정ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.수정ToolStripMenuItem.Text = "수정";
+            this.수정ToolStripMenuItem.Click += new System.EventHandler(this.수정ToolStripMenuItem_Click);
+            // 
+            // 삭제ToolStripMenuItem
+            // 
+            this.삭제ToolStripMenuItem.Name = "삭제ToolStripMenuItem";
+            this.삭제ToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.삭제ToolStripMenuItem.Text = "삭제";
             // 
             // pictureBox1
             // 
@@ -556,6 +605,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPage4.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -605,5 +655,10 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem 추가ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 수정ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 삭제ToolStripMenuItem;
     }
 }

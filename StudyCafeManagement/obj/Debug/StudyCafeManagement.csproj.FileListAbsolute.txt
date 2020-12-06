@@ -23,3 +23,4 @@ C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.Pri
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.AdminSetting.resources
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.ChangeLoginInfo.resources
 C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.ChangeBranchInfo.resources
+C:\kyu\StudyCafeManagement\StudyCafeManagement\obj\Debug\StudyCafeManagement.EditSit.resources
