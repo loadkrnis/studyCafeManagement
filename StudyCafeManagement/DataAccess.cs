@@ -68,7 +68,7 @@ namespace StudyCafeManagement
             get { return total_sit; }
         }
         private string using_sit;
-        public string UsingSit;
+        public string UsingSit => using_sit;
         private string dayCharge;
         public string DayCharge
         {
@@ -382,7 +382,6 @@ namespace StudyCafeManagement
             adapter.SelectCommand = new OracleCommand("select * from member where member_id='" + member_id + "'", conn);
             adapter.Fill(DS, "Member");
             PhoneNumber = DS.Tables["Member"].Rows[0]["phone_number"].ToString();
-            Console.WriteLine("PhoneNumber : "+PhoneNumber);
             return true;
         }
         public void ChangeLoginInfo(string id, string pwd)

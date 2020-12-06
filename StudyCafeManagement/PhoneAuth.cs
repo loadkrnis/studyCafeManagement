@@ -37,6 +37,7 @@ namespace StudyCafeManagement
                         MessageBox.Show("회원입니다.");
                         MainDashboard MD = (MainDashboard)Owner;
                         DB.InsertSale();
+                        DB.PhoneNumber = nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "");
                         MD.DB = DB;
                         MD.SetSitValue();
                         PrinterHelper.Print(DB);
@@ -63,9 +64,8 @@ namespace StudyCafeManagement
                         {
                             authNumber += random.Next(0, 10).ToString();
                         }
-                        Console.WriteLine(authNumber);
                         Console.WriteLine("Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
-                        //api.SendMessageAsync(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", ""), "Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
+                        api.SendMessageAsync(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", ""), "Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
                     }
                 }
                 else
@@ -82,6 +82,7 @@ namespace StudyCafeManagement
                     {
                         MainDashboard MD = (MainDashboard)Owner;
                         DB.InsertSale();
+                        DB.PhoneNumber = nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", "");
                         MD.DB = DB;
                         MD.SetSitValue();
                         PrinterHelper.Print(DB);
