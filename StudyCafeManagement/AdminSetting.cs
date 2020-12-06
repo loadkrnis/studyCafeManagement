@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace StudyCafeManagement
 {
     public partial class AdminSetting : Form
     {
+        Graphics g;
+        Sit[] SitArr;
         DataAccess db;
         public DataAccess DB
         {
@@ -68,6 +71,8 @@ namespace StudyCafeManagement
             get { return textBox4.Text; }
             set { textBox4.Text = value; }
         }
+        private bool IsOnClick = false;
+        private Point MouseOnClickPosition = new Point();
 
         private void AdminSetting_Load(object sender, EventArgs e)
         {
@@ -91,6 +96,7 @@ namespace StudyCafeManagement
 
         private void SetInfo()
         {
+            //InfoTextInit
             string pwd = "";
             label1.Text = DB.CeoID;
             for (int i = 0; i < DB.CeoPWD.Length; i++) pwd += "*";
@@ -102,6 +108,30 @@ namespace StudyCafeManagement
             textBox2.Text = DB.HourCharge[1];
             textBox3.Text = DB.HourCharge[2];
             textBox4.Text = DB.DayCharge;
+
+            //SitGraphicsInit
+            Location = new Point(this.Owner.Location.X, this.Owner.Location.Y + 80);
+            Bitmap canvas;
+            canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = canvas;
+            pictureBox1.Size = canvas.Size;
+            g = Graphics.FromImage(pictureBox1.Image);
+            g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
+            SitArr = DB.GetSits();
+            ListViewItem item;
+            listView1.Items.Clear();
+            for (int i = 0; i < SitArr.Length; i++)
+            {
+                DrawSit(SitArr[i]);
+                item = new ListViewItem(SitArr[i].num.ToString());
+                item.SubItems.Add(SitArr[i].x.ToString());
+                item.SubItems.Add(SitArr[i].y.ToString());
+                item.SubItems.Add(SitArr[i].isUsed == 'T' ? "사용중" : "사용가능");
+                listView1.Items.Add(item);
+
+            }
+
+            //SitListViewInit
         }
         private void button1_Click(object sender, EventArgs e) //Owner를 이용한 객체 전달
         {
@@ -123,6 +153,102 @@ namespace StudyCafeManagement
         private void button2_Click(object sender, EventArgs e)
         {
             DB.ChangeChargeInfo(this);
+        }
+
+        private void DrawSit(Sit sit)
+        {
+            Pen p = new Pen(Color.Gray, 3);
+            Font f = new Font("휴먼둥근헤드라인", 16, FontStyle.Bold);
+            if (sit.isUsed == 'T')
+            {
+                g.FillRectangle(Brushes.DimGray, sit.x, sit.y, 40, 35);
+            }
+            if (sit.isUsed == 'F')
+            {
+                g.FillRectangle(Brushes.GreenYellow, sit.x, sit.y, 40, 35);
+            }
+            g.DrawRectangle(p, sit.x, sit.y, 40, 35);
+            if (sit.num < 10)
+            {
+                g.DrawString(sit.num.ToString(), f, Brushes.Black, sit.x + 8, sit.y + 7);
+            }
+            else
+            {
+                g.DrawString(sit.num.ToString(), f, Brushes.Black, sit.x, sit.y + 7);
+            }
+        }
+
+        private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            for (int i = 0; i < SitArr.Length + 1; i++)
+            {
+                try
+                {
+                    if (e.Button == MouseButtons.Left)
+                    {
+                        if ((e.X >= SitArr[i].x && e.X <= SitArr[i].x + 40) && (e.Y >= SitArr[i].y && e.Y <= SitArr[i].y + 35))
+                        {
+                            Console.WriteLine("IsOnClick=true;");
+                            IsOnClick = true;
+                            Console.WriteLine("MouseClicK => SirArr[i].X:" + SitArr[i].x + " SitArr[i].Y:" + SitArr[i].y);
+                            MouseOnClickPosition.X = e.X;
+                            MouseOnClickPosition.Y = e.Y;
+                            break;
+                        }
+                    }
+                }
+                catch (Exception) { }
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            Console.WriteLine("IsOnClick=false;");
+            IsOnClick = false;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            ListViewItem item;
+            for (int i = 0; i < SitArr.Length + 1; i++)
+            {
+                try
+                {
+                    if ((e.X >= SitArr[i].x && e.X <= SitArr[i].x + 40) && (e.Y >= SitArr[i].y && e.Y <= SitArr[i].y + 35))
+                    {
+                        if (IsOnClick)
+                        {
+                            Bitmap canvas;
+                            canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                            pictureBox1.Image = canvas;
+                            pictureBox1.Size = canvas.Size;
+                            g = Graphics.FromImage(pictureBox1.Image);
+                            g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
+                            SitArr[i].x = SitArr[i].x + (e.X - MouseOnClickPosition.X);
+                            SitArr[i].y = SitArr[i].y + (e.Y - MouseOnClickPosition.Y);
+                            MouseOnClickPosition.X = e.X;
+                            MouseOnClickPosition.Y = e.Y;
+                            Console.WriteLine("MouseMove => SirArr[i].X:" + SitArr[i].x + " SitArr[i].Y:" + SitArr[i].y);
+                            item = new ListViewItem(SitArr[i].num.ToString());
+                            item.SubItems.Add(SitArr[i].x.ToString());
+                            item.SubItems.Add(SitArr[i].y.ToString());
+                            item.SubItems.Add(SitArr[i].isUsed == 'T' ? "사용중" : "사용가능");
+                            listView1.Items[i] = item;
+                            for (int j = 0; j < SitArr.Length; j++)
+                            {
+                                DrawSit(SitArr[j]);
+                            }
+                        }
+                        
+                    }
+                }
+                catch (Exception) { }
+            }
         }
     }
 }
