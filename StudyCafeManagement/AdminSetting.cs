@@ -15,7 +15,7 @@ namespace StudyCafeManagement
     {
         Graphics g;
         List<Sit> SitList = null;
-        Sit[] SitArr;
+        public Sit[] SitArr;
 
         DataAccess db;
         public DataAccess DB
@@ -200,9 +200,7 @@ namespace StudyCafeManagement
                     {
                         if ((e.X >= SitArr[i].x && e.X <= SitArr[i].x + 40) && (e.Y >= SitArr[i].y && e.Y <= SitArr[i].y + 35))
                         {
-                            Console.WriteLine("IsOnClick=true;");
                             IsOnClick = true;
-                            Console.WriteLine("MouseClicK => SirArr[i].X:" + SitArr[i].x + " SitArr[i].Y:" + SitArr[i].y);
                             MouseOnClickPosition.X = e.X;
                             MouseOnClickPosition.Y = e.Y;
                             break;
@@ -215,7 +213,6 @@ namespace StudyCafeManagement
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            Console.WriteLine("IsOnClick=false;");
             IsOnClick = false;
         }
 
@@ -240,7 +237,6 @@ namespace StudyCafeManagement
                             SitArr[i].y = SitArr[i].y + (e.Y - MouseOnClickPosition.Y);
                             MouseOnClickPosition.X = e.X;
                             MouseOnClickPosition.Y = e.Y;
-                            Console.WriteLine("MouseMove => SirArr[i].X:" + SitArr[i].x + " SitArr[i].Y:" + SitArr[i].y);
                             item = new ListViewItem(SitArr[i].num.ToString());
                             listView1.Items[i].SubItems[1].Text = SitArr[i].x.ToString();
                             listView1.Items[i].SubItems[2].Text = SitArr[i].y.ToString();
@@ -288,10 +284,43 @@ namespace StudyCafeManagement
 
         private void 수정ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            EditSit es = new EditSit();
+            string x = listView1.SelectedItems[0].SubItems[1].Text;
+            string y = listView1.SelectedItems[0].SubItems[2].Text;
+            int index = Convert.ToInt32(listView1.SelectedItems[0].SubItems[0].Text);
+            EditSit es = new EditSit(index, x, y);
             es.Owner = this;
             es.ShowDialog();
+            Bitmap canvas;
+            canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            pictureBox1.Image = canvas;
+            pictureBox1.Size = canvas.Size;
+            g = Graphics.FromImage(pictureBox1.Image);
+            g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
+            for (int i = 0; i < SitArr.Length; i++)
+            {
+                DrawSit(SitArr[i]);
+            }
+        }
+
+        private void 삭제ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult confirmResult = MessageBox.Show("전체삭제를 하시겠습니까?", "경고", MessageBoxButtons.YesNo);
+            if (confirmResult == DialogResult.Yes)
+            {
+                listView1.Items.Clear();
+                SitArr = new Sit[0];
+                Console.Write(SitArr.Length);
+                Bitmap canvas;
+                canvas = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+                pictureBox1.Image = canvas;
+                pictureBox1.Size = canvas.Size;
+                g = Graphics.FromImage(pictureBox1.Image);
+                g.DrawImage(Image.FromFile(Path.Combine("C:\\kyu\\StudyCafeManagement\\StudyCafeManagement\\Image", "201", "sitImage.png")), new Rectangle(0, 0, canvas.Width, canvas.Height));
+                for (int i = 0; i < SitArr.Length; i++)
+                {
+                    DrawSit(SitArr[i]);
+                }
+            }
         }
     }
 }
