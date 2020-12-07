@@ -188,7 +188,7 @@ namespace StudyCafeManagement
         }
         public bool IsMember(string number)
         {
-            adapter.SelectCommand = new OracleCommand("select * from member where phone_number = '" + number + "'", conn);
+            adapter.SelectCommand = new OracleCommand("select * from member where phone_number = '" + number + "' and branch_id='"+branch_id+"'", conn);
             DS.Clear();
             adapter.Fill(DS, "Member");
             if (DS.Tables["Member"].Select().Length == 1)
@@ -244,13 +244,14 @@ namespace StudyCafeManagement
             for (int i = 0; i < result.Length; i++)
             {
                 temp = (DS.Tables["Sit"].Rows[i]["end_at"]).ToString();
+                string hhh = DateTime.Parse(DS.Tables["Sit"].Rows[i]["end_at"].ToString()).ToString("hh");
                 //2020-12-01 오전 2:51:27
                 if (temp.Length > 1)
                 {
                     Date = temp.Substring(0, 10).Split('-');
-                    Time = (temp.Trim()).Substring(13).Split(':');
-                    if (temp.Substring(11, 2) == "오후") sitTime = new DateTime(Convert.ToInt32(Date[0]), Convert.ToInt32(Date[1]), Convert.ToInt32(Date[2]), Convert.ToInt32(Time[0]) + 12, Convert.ToInt32(Time[1]), Convert.ToInt32(Time[2]));
-                    else sitTime = new DateTime(Convert.ToInt32(Date[0]), Convert.ToInt32(Date[1]), Convert.ToInt32(Date[2]), Convert.ToInt32(Time[0]), Convert.ToInt32(Time[1]), Convert.ToInt32(Time[2]));
+                    Time = temp.Split(' ')[2].Split(':');
+                    //if (temp.Split(' ')[1] == "오후") sitTime = new DateTime(Convert.ToInt32(Date[0]), Convert.ToInt32(Date[1]), Convert.ToInt32(Date[2]), (Convert.ToInt32(Time[0]) + 12), Convert.ToInt32(Time[1]), Convert.ToInt32(Time[2]));
+                    sitTime = new DateTime(Convert.ToInt32(Date[0]), Convert.ToInt32(Date[1]), Convert.ToInt32(Date[2]), Convert.ToInt32(hhh), Convert.ToInt32(Time[1]), Convert.ToInt32(Time[2]));
                 }
                 if (DateTime.Compare(sitTime, now) <= 0)
                 {
@@ -426,7 +427,7 @@ namespace StudyCafeManagement
             MessageBox.Show("가격수정이 완료되었습니다.");
         }
         public void ModifySit(ListView.ListViewItemCollection items)
-        {
+        {   
             DS.Clear();
             DataRow row = null;
             adapter.SelectCommand = new OracleCommand("select * from sit where branch_id='" + branch_id + "' order by sit_num asc", conn);
@@ -441,6 +442,7 @@ namespace StudyCafeManagement
                     newRow["is_used"] = 'F';
                     newRow["location_x"] = items[i].SubItems[1].Text;
                     newRow["location_y"] = items[i].SubItems[2].Text;
+                    newRow["end_at"] = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
                     DS.Tables["Sit"].Rows.Add(newRow);
                     continue;
                 }

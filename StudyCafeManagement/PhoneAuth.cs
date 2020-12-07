@@ -65,7 +65,7 @@ namespace StudyCafeManagement
                             authNumber += random.Next(0, 10).ToString();
                         }
                         Console.WriteLine("Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
-                        api.SendMessageAsync(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", ""), "Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
+                        //api.SendMessageAsync(nTextBox1.Text.Replace("-", "").Replace("-", "").Replace("-", ""), "Book & Cup 스터디카페 " + DB.BranchName + " 입니다. 인증번호 [" + authNumber + "]를 입력해 주세요.");
                     }
                 }
                 else
