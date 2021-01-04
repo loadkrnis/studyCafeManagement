@@ -12,5 +12,5 @@
 ![image03](https://user-images.githubusercontent.com/45731301/103510962-7e47b400-4ea9-11eb-96ee-531d9eb99819.png)
 
 ## 데이터베이스 설계 (Oracle 11g)
-![image04](https://user-images.githubusercontent.com/45731301/103510965-7e47b400-4ea9-11eb-9fd8-697b272d874b.png)
+<img width="1525" alt="스크린샷 2021-01-04 오후 4 45 21" src="https://user-images.githubusercontent.com/45731301/103512587-53ab2a80-4eac-11eb-8638-6cb0ba5e220a.png">
 
