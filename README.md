@@ -20,7 +20,7 @@
 
 ## 데이터베이스 ERD (Oracle 11g)
 <img width="1525" alt="스크린샷 2021-01-04 오후 4 45 21" src="https://user-images.githubusercontent.com/45731301/103512587-53ab2a80-4eac-11eb-8638-6cb0ba5e220a.png">
-
+export.sql 
 <br/>  
 
 ## 주요 기능
